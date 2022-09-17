@@ -30,7 +30,7 @@ public class GameController {
         return "game";
     }
 
-    @PostMapping("/game/add")
+    @PostMapping("/add")
     public String addGame(@RequestBody String string) {
         log.info(string);
         return string;
