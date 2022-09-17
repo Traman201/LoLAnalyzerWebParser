@@ -7,14 +7,14 @@
     <title>Game</title>
 
     <tr th:each="game : ${games}" >
-        <td th:text="MatchId: ${game.matchId}"></td>
-        <td th:text="gameType: ${game.gameType}"></td>
-        <td th:text="game creation : ${game.gameCreation}"></td>
-        <td th:text="game duration: ${game.gameDuration}"></td>
-        <td th:text="end: ${game.gameEndTimestamp}"></td>
-        <td th:text="start: ${game.gameStartTimestamp}"></td>
-        <td th:text="mode: ${game.gameMode}"></td>
-        <td th:text="name: ${game.gameName}"></td>
+        <td th:text="${game.matchId}">match id </td>
+        <td th:text="${game.gameType}">type </td>
+        <td th:text="${game.gameCreation}">game creation </td>
+        <td th:text="${game.gameDuration}">game duration </td>
+        <td th:text="${game.gameEndTimestamp}">end </td>
+        <td th:text="${game.gameStartTimestamp}">start </td>
+        <td th:text="${game.gameMode}">mode </td>
+        <td th:text="${game.gameName}">name </td>
     </tr>
 </head>
 <body>
