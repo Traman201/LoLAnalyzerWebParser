@@ -20,6 +20,6 @@ public class GameController {
 
     @GetMapping
     public String gameForm(){
-        return "game";
+        return "game.html";
     }
 }
