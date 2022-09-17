@@ -53,8 +53,8 @@ public class GameController {
         game.setGameName(info.getString("gameName"));
         game.setGameType(info.getString("gameType"));
         game.setGameVersion(info.getString("gameVersion"));
-        game.setGameEndTimestamp(info.getLong("gameEndTimeStamp"));
-        game.setGameStartTimestamp(info.getLong("gameStartTimeStamp"));
+        game.setGameEndTimestamp(info.getLong("gameEndTimestamp"));
+        game.setGameStartTimestamp(info.getLong("gameStartTimestamp"));
         game.setMatchId(metadata.getString("matchId"));
 
         gameRepository.save(game);
