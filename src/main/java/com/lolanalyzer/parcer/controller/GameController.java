@@ -40,9 +40,12 @@ public class GameController {
     @PostMapping("/add")
     public String addGame(@RequestBody String gameInfo) {
 
-        JSONObject jsonObject = new JSONObject(gameInfo);
+        JSONObject root = new JSONObject(gameInfo);
+        JSONObject metadata = root.getJSONObject("metadata");
 
-        log.info(jsonObject.getString("matchId"));
+        log.info(metadata.getString("matchId"));
+
+
         return "redirect:/game";
     }
 
