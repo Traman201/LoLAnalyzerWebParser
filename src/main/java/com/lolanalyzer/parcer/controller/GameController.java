@@ -4,6 +4,7 @@ import com.lolanalyzer.parcer.entity.Game;
 import com.lolanalyzer.parcer.repositiory.GameRepository;
 import lombok.extern.slf4j.Slf4j;
 import netscape.javascript.JSObject;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JsonParser;
 import org.springframework.boot.json.JsonParserFactory;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -38,8 +40,9 @@ public class GameController {
     @PostMapping("/add")
     public String addGame(@RequestBody String gameInfo) {
 
-        //JSONObject
+        JSONObject jsonObject = new JSONObject(gameInfo);
 
+        log.info(jsonObject.getString("matchId"));
         return "redirect:/game";
     }
 

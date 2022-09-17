@@ -64,6 +64,13 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>javajson</artifactId>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/libs/json-20220320.jar</systemPath>
+		</dependency>
+
 	</dependencies>
 
 	<build>
