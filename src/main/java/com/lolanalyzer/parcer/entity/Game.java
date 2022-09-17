@@ -1,5 +1,6 @@
 package com.lolanalyzer.parcer.entity;
 
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.Column;
@@ -8,6 +9,7 @@ import javax.persistence.Id;
 import java.sql.Timestamp;
 
 @Entity
+@Data
 @Slf4j
 public class Game {
     @Id

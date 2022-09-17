@@ -35,6 +35,14 @@ public class GameController {
     }
 
     @PostMapping("/add")
+    public String addGame(@RequestBody Game game) {
+
+        log.info("Found game: " + game.getMatchId());
+
+        return "redirect:/game";
+    }
+
+    /*@PostMapping("/add")
     public String addGame(@RequestBody String string) {
         RestTemplate restTemplate = new RestTemplate();
         JsonParser parser = JsonParserFactory.getJsonParser();
@@ -53,6 +61,6 @@ public class GameController {
         log.info("Found entries: " + i + " " + entryNames);
 
         return "redirect:/game";
-    }
+    }*/
 
 }
