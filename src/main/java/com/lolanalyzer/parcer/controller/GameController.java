@@ -43,7 +43,7 @@ public class GameController {
         String mapArray[] = new String[map.size()];
 
         for(Map.Entry<String, Object> entry : map.entrySet()){
-            log.info(entry.getKey() + " = " + entry.getValue());
+            log.info(entry.getKey() + " = " + entry.getValue() + "\n");
         }
 
         return "redirect:/game";
