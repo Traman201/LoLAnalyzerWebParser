@@ -5,19 +5,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Games</title>
-
-    <tr th:each="game : ${games}" >
-        <td th:text="${game.matchId}"></td>
-        <td th:text="${game.gameType}"></td>
-        <td th:text="${game.gameCreation}"></td>
-        <td th:text="${game.gameDuration}"></td>
-        <td th:text="${game.gameEndTimestamp}"></td>
-        <td th:text="${game.gameStartTimestamp}"></td>
-        <td th:text="${game.gameMode}"></td>
-        <td th:text="${game.gameName}"></td>
-    </tr>
 </head>
 <body>
+<tr th:each="game : ${games}" >
+    <td th:text="${game.matchId}"></td>
+    <td th:text="${game.gameType}"></td>
+    <td th:text="${game.gameCreation}"></td>
+    <td th:text="${game.gameDuration}"></td>
+    <td th:text="${game.gameEndTimestamp}"></td>
+    <td th:text="${game.gameStartTimestamp}"></td>
+    <td th:text="${game.gameMode}"></td>
+    <td th:text="${game.gameName}"></td>
+</tr>
 <h1>Game</h1>
 </body>
 </html>
