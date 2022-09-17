@@ -3,6 +3,7 @@ package com.lolanalyzer.parcer.controller;
 import com.lolanalyzer.parcer.entity.Game;
 import com.lolanalyzer.parcer.repositiory.GameRepository;
 import lombok.extern.slf4j.Slf4j;
+import netscape.javascript.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JsonParser;
 import org.springframework.boot.json.JsonParserFactory;
@@ -35,9 +36,9 @@ public class GameController {
     }
 
     @PostMapping("/add")
-    public String addGame(@RequestBody Game game) {
+    public String addGame(@RequestBody String gameInfo) {
 
-        log.info("Found game: " + game.getMatchId());
+        //JSONObject
 
         return "redirect:/game";
     }
