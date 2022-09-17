@@ -19,4 +19,4 @@ spring:
 
     h2:
         console.enabled: true
-        webAllowOthers: true
+        settings.webAllowOthers: true
