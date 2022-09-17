@@ -32,12 +32,8 @@ public class GameController {
 
     @PostMapping("/game/add")
     public String addGame(@RequestBody String string) {
+        log.info(string);
         return string;
     }
 
-
-    /*@PostMapping
-    public String addGame(){
-
-    }*/
 }
