@@ -1,4 +1,4 @@
-package com.lolanalyzer.parcer.controller;
+package com.lolanalyzer.parcer;
 
 import com.lolanalyzer.parcer.entity.Game;
 import lombok.extern.slf4j.Slf4j;
