@@ -69,6 +69,7 @@
 			<artifactId>javajson</artifactId>
 			<scope>system</scope>
 			<systemPath>${project.basedir}/libs/json-20220320.jar</systemPath>
+			<version>20220320</version>
 		</dependency>
 
 	</dependencies>
