@@ -17,7 +17,7 @@ public class Game {
     private String matchId;
 
     long gameCreation, gameDuration, mapId, queueId;
-    Timestamp gameEndTimestamp, gameStartTimestamp;
+    long gameEndTimestamp, gameStartTimestamp;
     String gameMode, gameName, gameType, gameVersion, platform;
 
 

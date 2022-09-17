@@ -43,31 +43,26 @@ public class GameController {
         JSONObject root = new JSONObject(gameInfo);
         JSONObject metadata = root.getJSONObject("metadata");
 
-        log.info(metadata.getString("matchId"));
+        JSONObject info = root.getJSONObject("info");
 
+        Game game = new Game();
+
+        game.setGameCreation(info.getLong("gameCreation"));
+        game.setGameDuration(info.getLong("gameDuration"));
+        game.setGameMode(info.getString("gameMode"));
+        game.setGameName(info.getString("gameName"));
+        game.setGameType(info.getString("gameType"));
+        game.setGameVersion(info.getString("gameVersion"));
+        game.setGameEndTimestamp(info.getLong("gameEndTimeStamp"));
+        game.setGameStartTimestamp(info.getLong("gameStartTimeStamp"));
+        game.setMatchId(metadata.getString("matchId"));
+
+        gameRepository.save(game);
+
+        log.info(metadata.getString("matchId"));
 
         return "redirect:/game";
     }
 
-    /*@PostMapping("/add")
-    public String addGame(@RequestBody String string) {
-        RestTemplate restTemplate = new RestTemplate();
-        JsonParser parser = JsonParserFactory.getJsonParser();
-        Map<String, Object> map = parser.parseMap(string);
-
-        Map<String, Object> info, metadata;
-        info = parser.parseMap(map.get("info").toString());
-        metadata = parser.parseMap(map.get("metadata").toString());
-
-        int i = 0;
-        String entryNames = "";
-        for(Map.Entry<String, Object> entry : metadata.entrySet()){
-            entryNames += entry.getKey() + "; ";
-            i++;
-        }
-        log.info("Found entries: " + i + " " + entryNames);
-
-        return "redirect:/game";
-    }*/
 
 }
