@@ -40,11 +40,13 @@ public class GameController {
         JsonParser parser = JsonParserFactory.getJsonParser();
         Map<String, Object> map = parser.parseMap(string);
 
-        String mapArray[] = new String[map.size()];
+        Map<String, Object> info, metadata;
+        info = parser.parseMap(map.get("info").toString());
+        metadata = parser.parseMap(map.get("metadata").toString());
+
         int i = 0;
         String entryNames = "";
-        for(Map.Entry<String, Object> entry : map.entrySet()){
-            //log.info(entry.getKey() + " = " + entry.getValue() + "\n");
+        for(Map.Entry<String, Object> entry : metadata.entrySet()){
             entryNames += entry.getKey() + "; ";
             i++;
         }
