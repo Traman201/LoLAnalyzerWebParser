@@ -42,11 +42,13 @@ public class GameController {
 
         String mapArray[] = new String[map.size()];
         int i = 0;
+        String entryNames = "";
         for(Map.Entry<String, Object> entry : map.entrySet()){
             //log.info(entry.getKey() + " = " + entry.getValue() + "\n");
+            entryNames += entry.getKey() + "; ";
             i++;
         }
-        log.info("Found entries: " + i);
+        log.info("Found entries: " + i + " " + entryNames);
 
         return "redirect:/game";
     }
