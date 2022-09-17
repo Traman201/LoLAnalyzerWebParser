@@ -5,6 +5,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Game</title>
+
+    <tr th:each="game : ${games}" >
+        <td th:text="${game.matchId}"></td>
+        <td th:text="${game.gameType}"></td>
+    </tr>
 </head>
 <body>
 <h1>Game</h1>

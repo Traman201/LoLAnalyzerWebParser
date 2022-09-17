@@ -1,25 +1,37 @@
 package com.lolanalyzer.parcer.controller;
 
 import com.lolanalyzer.parcer.entity.Game;
+import com.lolanalyzer.parcer.repositiory.GameRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @Controller
 @Slf4j
 @RequestMapping("/game")
 public class GameController {
-/*
-    @PostMapping
-    public ResponseEntity<Game> create(@RequestBody Game game){
 
-        log.info(game.toString());
-        return null;
-    }
-*/
+    private GameRepository gameRepository;
     @GetMapping
-    public String gameForm(){
+    public String gameForm(Model model){
+        ArrayList<Game> games = (ArrayList<Game>) gameRepository.findAll();
+        model.addAttribute("games", games);
+
         return "game";
     }
+
+    @PostMapping("/game/add")
+    public String addGame(@RequestBody String string) {
+        return string;
+    }
+
+
+    /*@PostMapping
+    public String addGame(){
+
+    }*/
 }
