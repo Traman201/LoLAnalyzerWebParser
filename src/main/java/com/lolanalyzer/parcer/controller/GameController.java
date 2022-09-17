@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Controller
 @Slf4j
 @RequestMapping("/game")
 public class GameController {
@@ -20,6 +21,6 @@ public class GameController {
 
     @GetMapping
     public String gameForm(){
-        return "game.html";
+        return "game";
     }
 }
