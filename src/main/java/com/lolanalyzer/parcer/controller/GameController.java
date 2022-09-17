@@ -41,10 +41,12 @@ public class GameController {
         Map<String, Object> map = parser.parseMap(string);
 
         String mapArray[] = new String[map.size()];
-
+        int i = 0;
         for(Map.Entry<String, Object> entry : map.entrySet()){
-            log.info(entry.getKey() + " = " + entry.getValue() + "\n");
+            //log.info(entry.getKey() + " = " + entry.getValue() + "\n");
+            i++;
         }
+        log.info("Found entries: " + i);
 
         return "redirect:/game";
     }
