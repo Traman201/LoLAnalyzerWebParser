@@ -1,6 +1,7 @@
 package com.lolanalyzer.parcer.riotapi;
 
 import com.lolanalyzer.parcer.entity.Match;
+import com.lolanalyzer.parcer.entity.MatchId;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.weaver.ast.Call;
 import org.json.JSONObject;
@@ -53,17 +54,20 @@ public class MatchAPI {
         match.setMatchId(metadata.getString("matchId"));
         match.setDataVersion(metadata.getString("dataVersion"));
 
+        MatchId id = new MatchId();
+        id.setPlatformId(info.getString("platformId"));
+        id.setGameId(info.getLong("gameId"));
+        match.setId(id);
+
         match.setGameCreation(info.getLong("gameCreation"));
         match.setGameDuration(info.getLong("gameDuration"));
         match.setGameEndTimestamp(info.getLong("gameEndTimestamp"));
-        match.setGameId(info.getLong("gameId"));
         match.setGameMode(info.getString("gameMode"));
         match.setGameName("gameName");
         match.setGameStartTimestamp(info.getLong("gameStartTimestamp"));
         match.setGameType(info.getString("gameType"));
         match.setGameVersion(info.getString("gameVersion"));
         match.setMapId(info.getLong("mapId"));
-        match.setPlatformId(info.getString("platformId"));
         match.setQueueId(info.getLong("queueId"));
         match.setTournamentCode(info.getString("tournamentCode"));
 

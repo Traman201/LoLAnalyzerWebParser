@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -14,13 +15,13 @@ import javax.persistence.Id;
 @Getter
 @Slf4j
 public class Match {
-    @Id
-    @Column(name = "match_id", nullable = false)
-    private String matchId;
+
+    @EmbeddedId
+    MatchId id;
 
     long gameCreation, gameDuration, mapId, queueId;
-    long gameEndTimestamp, gameStartTimestamp, gameId;
-    String gameMode, gameName, gameType, gameVersion, platformId, tournamentCode;
+    long gameEndTimestamp, gameStartTimestamp;
+    String gameMode, gameName, gameType, gameVersion, tournamentCode, matchId;
     String dataVersion;
 
 
