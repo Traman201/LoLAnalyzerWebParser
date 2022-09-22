@@ -19,6 +19,28 @@ import java.util.concurrent.Callable;
 @Slf4j
 @Service
 public class MatchAPI {
+    public static String[] getPossibleTextMatchValues(){
+        return new String[]  {
+                "gameMode",
+                "gameName",
+                "gameType",
+                "gameVersion",
+                "tournamentCode",
+                "matchId",
+                "dataVersion"
+        };
+    }
+    public static String[] getPossibleNumericMatchValues(){
+        return new String[] {
+                "gameCreation",
+                "gameDuration",
+                "mapId",
+                "queueId",
+                "gameEndTimestamp",
+                "gameStartTimestamp"
+
+        };
+    }
 
     public static String getRawMatchData(String matchId) throws IOException {
         URL url = new URL("https://" +
@@ -50,15 +72,26 @@ public class MatchAPI {
         JSONObject info = root.getJSONObject("info");
 
         Match match = new Match();
-
+/*
         match.setMatchId(metadata.getString("matchId"));
         match.setDataVersion(metadata.getString("dataVersion"));
-
+*/
         MatchId id = new MatchId();
         id.setPlatformId(info.getString("platformId"));
         id.setGameId(info.getLong("gameId"));
         match.setId(id);
+        for(String textValueKey : getPossibleTextMatchValues()){
+            try{
+                match.getTextMatchData().put(textValueKey, info.getString(textValueKey));
+            }catch (Exception e){
+                match.getTextMatchData().put(textValueKey, metadata.getString(textValueKey));
+            }
+        }
 
+        for(String numericValueKey : getPossibleNumericMatchValues()){
+            match.getNumericMatchData().put(numericValueKey, info.getLong(numericValueKey));
+        }
+/*
         match.setGameCreation(info.getLong("gameCreation"));
         match.setGameDuration(info.getLong("gameDuration"));
         match.setGameEndTimestamp(info.getLong("gameEndTimestamp"));
@@ -70,7 +103,7 @@ public class MatchAPI {
         match.setMapId(info.getLong("mapId"));
         match.setQueueId(info.getLong("queueId"));
         match.setTournamentCode(info.getString("tournamentCode"));
-
+*/
         log.info(info.getJSONArray("participants").toString());
 
         return match;

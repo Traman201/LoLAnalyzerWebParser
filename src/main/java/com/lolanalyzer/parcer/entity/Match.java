@@ -1,14 +1,13 @@
 package com.lolanalyzer.parcer.entity;
 
-import lombok.Data;
+import com.lolanalyzer.parcer.riotapi.MatchAPI;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 @Setter
@@ -19,10 +18,20 @@ public class Match {
     @EmbeddedId
     MatchId id;
 
-    long gameCreation, gameDuration, mapId, queueId;
-    long gameEndTimestamp, gameStartTimestamp;
-    String gameMode, gameName, gameType, gameVersion, tournamentCode, matchId;
-    String dataVersion;
+
+    @ElementCollection
+    Map<String, String> textMatchData;
+    @ElementCollection
+    Map<String, Long> numericMatchData;
+
+    public Match(){
+        textMatchData = new HashMap<>();
+        numericMatchData = new HashMap<>();
+
+
+
+    }
+
 
 
 

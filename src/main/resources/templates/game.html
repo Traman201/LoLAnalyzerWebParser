@@ -24,33 +24,25 @@
     <thead class="thead-dark">
     <tr>
         <th scope="col">Id</th>
-        <th scope="col">creation</th>
-        <th scope="col">duration</th>
-        <th scope="col">map</th>
-        <th scope="col">queue</th>
-        <th scope="col">end</th>
-        <th scope="col">start</th>
-        <th scope="col">mode</th>
-        <th scope="col">Name</th>
-        <th scope="col">type</th>
-        <th scope="col">version</th>
-        <th scope="col">platform</th>
+        <th scope="col">Platform</th>
+        <th:block th:each="textEntry : ${games[0].textMatchData}">
+            <th scope="col" th:text="${textEntry.key}"></th>
+        </th:block>
+        <th:block th:each="textEntry : ${games[0].numericMatchData}">
+            <th scope="col" th:text="${textEntry.key}"></th>
+        </th:block>
     </tr>
     </thead>
     <tbody>
     <tr th:each="game : ${games}" >
-        <td th:text="${game.matchId}"></td>
-        <td th:text="${game.gameCreation}"></td>
-        <td th:text="${game.gameDuration}"></td>
-        <td th:text="${game.mapId}"></td>
-        <td th:text="${game.queueId}"></td>
-        <td th:text="${game.gameEndTimestamp}"></td>
-        <td th:text="${game.gameStartTimestamp}"></td>
-        <td th:text="${game.gameMode}"></td>
-        <td th:text="${game.gameName}"></td>
-        <td th:text="${game.gameType}"></td>
-        <td th:text="${game.gameVersion}"></td>
+        <td th:text="${game.id.gameId}"></td>
         <td th:text="${game.id.platformId}"></td>
+        <th:block th:each="textEntry : ${game.textMatchData}">
+            <td scope="col" th:text="${textEntry.value}"></td>
+        </th:block>
+        <th:block th:each="textEntry : ${game.numericMatchData}">
+            <td scope="col" th:text="${textEntry.value}"></td>
+        </th:block>
     </tr>
 
 </table>
