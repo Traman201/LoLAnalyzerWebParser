@@ -63,6 +63,4 @@ public class GameController {
 
         return "redirect:/game";
     }
-
-
 }

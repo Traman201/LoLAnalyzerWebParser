@@ -8,7 +8,7 @@ spring:
         static-locations: file:src/main/resources/static/
         cache:
         period: 0
-
+#200 OK
     datasource:
         username: sa
         password: password
