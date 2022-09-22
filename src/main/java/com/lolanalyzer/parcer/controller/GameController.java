@@ -1,7 +1,9 @@
 package com.lolanalyzer.parcer.controller;
 
-import com.lolanalyzer.parcer.entity.Game;
+import com.lolanalyzer.parcer.entity.Match;
 import com.lolanalyzer.parcer.repositiory.GameRepository;
+import com.lolanalyzer.parcer.riotapi.MatchAPI;
+import com.lolanalyzer.parcer.riotapi.RiotAPIConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 @Controller
@@ -26,7 +29,7 @@ public class GameController {
     }
     @GetMapping
     public String gameForm(Model model){
-        ArrayList<Game> games = (ArrayList<Game>) gameRepository.findAll();
+        ArrayList<Match> games = (ArrayList<Match>) gameRepository.findAll();
         model.addAttribute("games", games);
 
         return "game";
@@ -34,10 +37,14 @@ public class GameController {
 
     @PostMapping()
     public String addGame(@RequestParam String matchID, @RequestParam String apiKey) {
+        RiotAPIConfiguration.getInstance().setApiKey(apiKey);
+        try {
+            gameRepository.save(MatchAPI.getMatch(matchID));
+        } catch (IOException e) {
 
-        Game game = new Game();
+            throw new RuntimeException(e);
+        }
 
-        gameRepository.save(game);
 
 
         return "redirect:/game";

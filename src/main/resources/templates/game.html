@@ -11,7 +11,7 @@
 <h1>Games</h1>
 <div class="input-group mb-3" style="margin: 20px; ">
     <form method="post">
-        <input type="number" class="form-control" placeholder="matchId(numberOnly)"  aria-describedby="basic-addon2" name="matchID">
+        <input type="text" class="form-control" placeholder="matchId(numberOnly)"  aria-describedby="basic-addon2" name="matchID">
         <br>
         <input type="text" class="form-control" placeholder="api Key"  aria-describedby="basic-addon2" name="apiKey">
         <div class="input-group-append" style="margin-top:10px">
@@ -50,7 +50,7 @@
         <td th:text="${game.gameName}"></td>
         <td th:text="${game.gameType}"></td>
         <td th:text="${game.gameVersion}"></td>
-        <td th:text="${game.platform}"></td>
+        <td th:text="${game.platformId}"></td>
     </tr>
 
 </table>
