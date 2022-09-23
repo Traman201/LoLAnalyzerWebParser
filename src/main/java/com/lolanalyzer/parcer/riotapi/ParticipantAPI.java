@@ -1,8 +1,8 @@
 package com.lolanalyzer.parcer.riotapi;
 
-import com.lolanalyzer.parcer.entity.MatchId;
+import com.lolanalyzer.parcer.entytiId.MatchId;
 import com.lolanalyzer.parcer.entity.Participant;
-import com.lolanalyzer.parcer.entity.ParticipantId;
+import com.lolanalyzer.parcer.entytiId.ParticipantId;
 import org.json.JSONObject;
 
 public class ParticipantAPI {

@@ -1,7 +1,7 @@
 package com.lolanalyzer.parcer.repositiory;
 
 import com.lolanalyzer.parcer.entity.Match;
-import com.lolanalyzer.parcer.entity.MatchId;
+import com.lolanalyzer.parcer.entytiId.MatchId;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;

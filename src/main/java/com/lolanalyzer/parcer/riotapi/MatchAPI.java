@@ -1,9 +1,8 @@
 package com.lolanalyzer.parcer.riotapi;
 
 import com.lolanalyzer.parcer.entity.Match;
-import com.lolanalyzer.parcer.entity.MatchId;
+import com.lolanalyzer.parcer.entytiId.MatchId;
 import com.lolanalyzer.parcer.entity.Participant;
-import com.lolanalyzer.parcer.repositiory.ParticipantRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -109,5 +108,27 @@ public class MatchAPI {
             participants.add(ParticipantAPI.parseParticipant((JSONObject)participantJSON, matchId));
         }
         return participants;
+    }
+
+    public static String getRawMatchTimeline(String matchId) throws IOException {
+        URL url = new URL("https://" +
+                RiotAPIHelper.regionConverter(RiotAPIConfiguration.getInstance().region) +
+                ".api.riotgames.com/lol/match/v5/matches/" + matchId + "/timeline");
+
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+        con.setRequestProperty("Accept", "application/json");
+        con.setRequestProperty("X-Riot-Token", RiotAPIConfiguration.getInstance().getApiKey());
+        con.setDoOutput(true);
+
+        try(BufferedReader br = new BufferedReader(
+                new InputStreamReader(con.getInputStream(), "utf-8"))) {
+            StringBuilder response = new StringBuilder();
+            String responseLine = null;
+            while ((responseLine = br.readLine()) != null) {
+                response.append(responseLine.trim());
+            }
+            return response.toString();
+        }
     }
 }

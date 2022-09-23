@@ -1,5 +1,6 @@
 package com.lolanalyzer.parcer.entity;
 
+import com.lolanalyzer.parcer.entytiId.MatchId;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +28,9 @@ public class Match {
 
     @OneToMany
     List<Participant> participants;
+
+    @OneToOne
+    Timeline timeline;
 
     public Match(){
         textData = new HashMap<>();
