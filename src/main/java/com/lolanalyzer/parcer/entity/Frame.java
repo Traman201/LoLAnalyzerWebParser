@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 
 @Setter
@@ -26,6 +27,11 @@ public class Frame {
 
     @OneToMany
     List<EventId> events;
+
+    public Frame(){
+        participantFrames = new ArrayList<>();
+        events = new ArrayList<>();
+    }
 
 
 }

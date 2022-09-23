@@ -31,11 +31,7 @@ public class GameController {
         this.participantRepository = participantRepository;
     }
 
-    @GetMapping("/{matchId}/timeline")
-    public String gameTimelineForm(){
-        /*TODO*/
-        return "timeliine";
-    }
+
     @GetMapping
     public String gameForm(Model model){
         ArrayList<Match> games = (ArrayList<Match>) gameRepository.findAll();

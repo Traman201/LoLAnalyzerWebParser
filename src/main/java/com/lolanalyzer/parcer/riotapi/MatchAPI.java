@@ -110,25 +110,4 @@ public class MatchAPI {
         return participants;
     }
 
-    public static String getRawMatchTimeline(String matchId) throws IOException {
-        URL url = new URL("https://" +
-                RiotAPIHelper.regionConverter(RiotAPIConfiguration.getInstance().region) +
-                ".api.riotgames.com/lol/match/v5/matches/" + matchId + "/timeline");
-
-        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-        con.setRequestMethod("GET");
-        con.setRequestProperty("Accept", "application/json");
-        con.setRequestProperty("X-Riot-Token", RiotAPIConfiguration.getInstance().getApiKey());
-        con.setDoOutput(true);
-
-        try(BufferedReader br = new BufferedReader(
-                new InputStreamReader(con.getInputStream(), "utf-8"))) {
-            StringBuilder response = new StringBuilder();
-            String responseLine = null;
-            while ((responseLine = br.readLine()) != null) {
-                response.append(responseLine.trim());
-            }
-            return response.toString();
-        }
-    }
 }
