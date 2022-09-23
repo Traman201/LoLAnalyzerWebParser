@@ -4,9 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashMap;
+import java.util.Map;
 
 @Entity
 @Slf4j
@@ -16,8 +16,26 @@ public class Participant {
     @EmbeddedId
     ParticipantId id;
 
-    long assists, baronKills, basicPings;
-    long bountyLevel;
+
+    @Embedded
+    Challenges challenges;
+
+    @ElementCollection
+    Map<String, String> textData;
+
+    @ElementCollection
+    Map<String, Long> numericData;
+
+    @ElementCollection
+    Map<String, Boolean> booleanData;
+
+    public Participant(){
+        textData = new HashMap<>();
+        numericData = new HashMap<>();
+        booleanData = new HashMap<>();
+    }
+
+
 
 
 }

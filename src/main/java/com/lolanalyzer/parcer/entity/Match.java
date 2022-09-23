@@ -1,12 +1,13 @@
 package com.lolanalyzer.parcer.entity;
 
-import com.lolanalyzer.parcer.riotapi.MatchAPI;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Entity
@@ -20,16 +21,17 @@ public class Match {
 
 
     @ElementCollection
-    Map<String, String> textMatchData;
+    Map<String, String> textData;
     @ElementCollection
-    Map<String, Long> numericMatchData;
+    Map<String, Long> numericData;
+
+    @OneToMany
+    List<Participant> participants;
 
     public Match(){
-        textMatchData = new HashMap<>();
-        numericMatchData = new HashMap<>();
-
-
-
+        textData = new HashMap<>();
+        numericData = new HashMap<>();
+        participants = new ArrayList<>();
     }
 
 

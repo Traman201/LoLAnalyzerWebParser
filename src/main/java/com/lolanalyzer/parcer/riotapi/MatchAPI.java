@@ -2,10 +2,11 @@ package com.lolanalyzer.parcer.riotapi;
 
 import com.lolanalyzer.parcer.entity.Match;
 import com.lolanalyzer.parcer.entity.MatchId;
+import com.lolanalyzer.parcer.entity.Participant;
+import com.lolanalyzer.parcer.repositiory.ParticipantRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.weaver.ast.Call;
+import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.jmx.export.metadata.ManagedAttribute;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -13,13 +14,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.concurrent.Callable;
+import java.util.ArrayList;
 
 @Slf4j
 @Service
 public class MatchAPI {
-    public static String[] getPossibleTextMatchValues(){
+
+
+    public static String[] getPossibleTextValueKeys(){
         return new String[]  {
                 "gameMode",
                 "gameName",
@@ -30,7 +32,7 @@ public class MatchAPI {
                 "dataVersion"
         };
     }
-    public static String[] getPossibleNumericMatchValues(){
+    public static String[] getPossibleNumericValueKeys(){
         return new String[] {
                 "gameCreation",
                 "gameDuration",
@@ -40,6 +42,15 @@ public class MatchAPI {
                 "gameStartTimestamp"
 
         };
+    }
+
+    public static MatchId constructMatchId(String matchId){
+        MatchId id = new MatchId();
+
+        String[] splitted = matchId.split("_");
+        id.setPlatformId(splitted[0]);
+        id.setGameId(Long.parseLong(splitted[1]));
+        return id;
     }
 
     public static String getRawMatchData(String matchId) throws IOException {
@@ -72,40 +83,31 @@ public class MatchAPI {
         JSONObject info = root.getJSONObject("info");
 
         Match match = new Match();
-/*
-        match.setMatchId(metadata.getString("matchId"));
-        match.setDataVersion(metadata.getString("dataVersion"));
-*/
+
         MatchId id = new MatchId();
         id.setPlatformId(info.getString("platformId"));
         id.setGameId(info.getLong("gameId"));
         match.setId(id);
-        for(String textValueKey : getPossibleTextMatchValues()){
+
+        for(String textValueKey : getPossibleTextValueKeys()){
             try{
-                match.getTextMatchData().put(textValueKey, info.getString(textValueKey));
+                match.getTextData().put(textValueKey, info.getString(textValueKey));
             }catch (Exception e){
-                match.getTextMatchData().put(textValueKey, metadata.getString(textValueKey));
+                match.getTextData().put(textValueKey, metadata.getString(textValueKey));
             }
         }
 
-        for(String numericValueKey : getPossibleNumericMatchValues()){
-            match.getNumericMatchData().put(numericValueKey, info.getLong(numericValueKey));
+        for(String numericValueKey : getPossibleNumericValueKeys()){
+            match.getNumericData().put(numericValueKey, info.getLong(numericValueKey));
         }
-/*
-        match.setGameCreation(info.getLong("gameCreation"));
-        match.setGameDuration(info.getLong("gameDuration"));
-        match.setGameEndTimestamp(info.getLong("gameEndTimestamp"));
-        match.setGameMode(info.getString("gameMode"));
-        match.setGameName("gameName");
-        match.setGameStartTimestamp(info.getLong("gameStartTimestamp"));
-        match.setGameType(info.getString("gameType"));
-        match.setGameVersion(info.getString("gameVersion"));
-        match.setMapId(info.getLong("mapId"));
-        match.setQueueId(info.getLong("queueId"));
-        match.setTournamentCode(info.getString("tournamentCode"));
-*/
-        log.info(info.getJSONArray("participants").toString());
-
+        match.setParticipants(getParticipants(info.getJSONArray("participants"), id));
         return match;
+    }
+    public static ArrayList<Participant> getParticipants(JSONArray participantsJSON, MatchId matchId){
+        ArrayList<Participant> participants = new ArrayList<>();
+        for(Object participantJSON : participantsJSON){
+            participants.add(ParticipantAPI.parseParticipant((JSONObject)participantJSON, matchId));
+        }
+        return participants;
     }
 }
