@@ -26,7 +26,7 @@ public class Frame {
     List<ParticipantFrame> participantFrames;
 
     @OneToMany
-    List<EventId> events;
+    List<Event> events;
 
     public Frame(){
         participantFrames = new ArrayList<>();

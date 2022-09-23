@@ -12,6 +12,6 @@ import java.io.Serializable;
 @Getter
 @Embeddable
 public class EventId implements Serializable {
-    long timestamp;
+    long preciseTimestamp;
     FrameId frameId;
 }

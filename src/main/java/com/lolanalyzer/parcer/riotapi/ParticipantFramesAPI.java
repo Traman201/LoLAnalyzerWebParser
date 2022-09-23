@@ -81,6 +81,7 @@ public class ParticipantFramesAPI {
         ParticipantFrameId id = new ParticipantFrameId();
         id.setFrameId(frame.getId());
         id.setParticipantId(frameJSONObject.getLong("participantId"));
+        participantFrame.setId(id);
 
         participantFrame.setChampionStats(
                 parseChampionStats(frameJSONObject.getJSONObject("championStats"))

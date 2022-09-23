@@ -100,6 +100,7 @@ public class MatchAPI {
             match.getNumericData().put(numericValueKey, info.getLong(numericValueKey));
         }
         match.setParticipants(getParticipants(info.getJSONArray("participants"), id));
+        match.setTimeline(TimelineAPI.getTimeline(matchId));
         return match;
     }
     public static ArrayList<Participant> getParticipants(JSONArray participantsJSON, MatchId matchId){
