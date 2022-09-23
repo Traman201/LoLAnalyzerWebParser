@@ -21,9 +21,16 @@
             <th:block th:each="textEntry : ${participants[0].numericData}">
                 <th scope="col" th:text="${textEntry.key}"></th>
             </th:block>
-        <th:block th:each="textEntry : ${participants[0].booleanData}">
-            <th scope="col" th:text="${textEntry.key}"></th>
-        </th:block>
+            <th:block th:each="textEntry : ${participants[0].booleanData}">
+                <th scope="col" th:text="${textEntry.key}"></th>
+            </th:block>
+            <th:block th:each="textEntry : ${participants[0].challenges.longValues}">
+                <th scope="col" th:text="${textEntry.key}"></th>
+            </th:block>
+            <th:block th:each="textEntry : ${participants[0].challenges.realValues}">
+                <th scope="col" th:text="${textEntry.key}"></th>
+            </th:block>
+
 
     </tr>
     </thead>
@@ -39,6 +46,12 @@
             <td scope="col" th:text="${textEntry.value}"></td>
         </th:block>
         <th:block th:each="textEntry : ${participant.booleanData}">
+            <th scope="col" th:text="${textEntry.value}"></th>
+        </th:block>
+        <th:block th:each="textEntry : ${participant.challenges.longValues}">
+            <th scope="col" th:text="${textEntry.value}"></th>
+        </th:block>
+        <th:block th:each="textEntry : ${participant.challenges.realValues}">
             <th scope="col" th:text="${textEntry.value}"></th>
         </th:block>
     </tr>

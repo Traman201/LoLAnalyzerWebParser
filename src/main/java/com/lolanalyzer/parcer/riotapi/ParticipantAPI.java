@@ -145,6 +145,7 @@ public class ParticipantAPI {
         for(String boolKey : getPossibleBooleanValueKeys()){
             participant.getBooleanData().put(boolKey, participantJSON.getBoolean(boolKey));
         }
+        participant.setChallenges(ChallengesAPI.parseChallenges(participantJSON.getJSONObject("challenges")));
         return participant;
     }
 }

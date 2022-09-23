@@ -130,10 +130,20 @@ public class ChallengesAPI {
     public static Challenges parseChallenges(JSONObject challengesJSON){
         Challenges challenges = new Challenges();
         for(String longKey : getPossibleNumericValueKeys()){
-            challenges.getLongValues().put(longKey, challengesJSON.getLong(longKey));
+            try{
+                challenges.getLongValues().put(longKey, challengesJSON.getLong(longKey));
+            }catch (Exception e){
+                challenges.getLongValues().put(longKey, null);
+            }
+
         }
         for (String realKey : getPossibleRealValueKeys()){
-            challenges.getRealValues().put(realKey, challengesJSON.getDouble(realKey));
+            try{
+                challenges.getRealValues().put(realKey, challengesJSON.getDouble(realKey));
+            }catch (Exception e){
+                challenges.getRealValues().put(realKey, null);
+            }
+
         }
 
         return challenges;
