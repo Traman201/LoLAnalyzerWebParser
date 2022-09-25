@@ -9,6 +9,11 @@ public class ItemDestroyedAPI extends AbstractEventAPI{
 
     @Override
     public ItemDestroyed parseEvent(JSONObject o, Frame parentFrame) {
-        return null;
+        ItemDestroyed itemDestroyed = (ItemDestroyed) super.parseEvent(o, parentFrame);
+
+        itemDestroyed.setItemId(o.getLong("itemId"));
+        itemDestroyed.setParticipantId(o.getLong("participantId"));
+
+        return itemDestroyed;
     }
 }

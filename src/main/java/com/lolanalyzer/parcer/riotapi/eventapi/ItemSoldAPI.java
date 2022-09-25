@@ -10,6 +10,10 @@ public class ItemSoldAPI extends AbstractEventAPI{
 
     @Override
     public ItemSold parseEvent(JSONObject o, Frame parentFrame) {
-        return null;
+        ItemSold itemSold = (ItemSold) super.parseEvent(o, parentFrame);
+        itemSold.setItemId(o.getLong("itemId"));
+        itemSold.setParticipantId(o.getLong("participantId"));
+
+        return itemSold;
     }
 }

@@ -9,6 +9,11 @@ public class GameEndAPI extends AbstractEventAPI{
 
     @Override
     public GameEnd parseEvent(JSONObject o, Frame parentFrame) {
-        return null;
+        GameEnd gameEnd = (GameEnd) super.parseEvent(o, parentFrame);
+
+        gameEnd.setRealTimeStamp(o.getLong("realTimestamp"));
+        gameEnd.setWinningTeam(o.getLong("winningTeam"));
+
+        return gameEnd;
     }
 }

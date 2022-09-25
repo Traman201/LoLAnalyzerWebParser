@@ -52,6 +52,7 @@ public class FramesAPI {
         for(Object o : eventsJSON){
             events.add(EventAPI.parseEvent((JSONObject) o, frame));
         }
+        frame.setEvents(events);
 
 
         return frame;

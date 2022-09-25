@@ -9,6 +9,11 @@ public class WardPlacedAPI extends AbstractEventAPI{
 
     @Override
     public WardPlaced parseEvent(JSONObject o, Frame parentFrame) {
-        return null;
+        WardPlaced wardPlaced = (WardPlaced) super.parseEvent(o, parentFrame);
+
+        wardPlaced.setCreatorId(o.getLong("creatorId"));
+        wardPlaced.setWardType(o.getString("wardType"));
+
+        return wardPlaced;
     }
 }

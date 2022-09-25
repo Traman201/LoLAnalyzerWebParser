@@ -100,7 +100,7 @@ public class ParticipantFramesAPI {
         return participantFrame;
     }
 
-    private static Position parsePosition(JSONObject positionJSON) {
+    public static Position parsePosition(JSONObject positionJSON) {
         Position position = new Position();
 
         position.setX(positionJSON.getLong(getPositionKeys()[0]));

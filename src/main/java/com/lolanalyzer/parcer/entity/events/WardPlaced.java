@@ -11,6 +11,6 @@ import javax.persistence.Entity;
 @Setter
 @Slf4j
 public class WardPlaced extends Event{
-    int creatorId;
+    long creatorId;
     String wardType;
 }

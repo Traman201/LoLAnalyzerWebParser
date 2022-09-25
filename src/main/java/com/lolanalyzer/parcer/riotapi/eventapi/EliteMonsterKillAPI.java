@@ -3,12 +3,22 @@ package com.lolanalyzer.parcer.riotapi.eventapi;
 import com.lolanalyzer.parcer.entity.Frame;
 import com.lolanalyzer.parcer.entity.events.EliteMonsterKill;
 import com.lolanalyzer.parcer.entity.events.Event;
+import com.lolanalyzer.parcer.riotapi.ParticipantFramesAPI;
 import org.json.JSONObject;
 
 public class EliteMonsterKillAPI extends AbstractEventAPI{
 
     @Override
     public EliteMonsterKill parseEvent(JSONObject o, Frame parentFrame) {
-        return null;
+        EliteMonsterKill eliteMonsterKill = (EliteMonsterKill) super.parseEvent(o, parentFrame);
+
+        eliteMonsterKill.setBounty(o.getLong("bounty"));
+        eliteMonsterKill.setKillerId(o.getLong("killerId"));
+        eliteMonsterKill.setKillerTeamId(o.getLong("killerTeamId"));
+        eliteMonsterKill.setMonsterSubType(o.getString("monsterSubType"));
+        eliteMonsterKill.setMonsterType(o.getString("monsterType"));
+        eliteMonsterKill.setPosition(ParticipantFramesAPI.parsePosition(o.getJSONObject("position")));
+
+        return eliteMonsterKill;
     }
 }

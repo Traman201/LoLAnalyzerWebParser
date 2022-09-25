@@ -12,6 +12,6 @@ import javax.persistence.Entity;
 @Slf4j
 public class SkillLevelUp extends Event{
     String levelUpType;
-    int participantId;
-    int skillSlot;
+    long participantId;
+    long skillSlot;
 }

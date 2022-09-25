@@ -11,6 +11,6 @@ import javax.persistence.Entity;
 @Setter
 @Slf4j
 public class ItemPurchased extends Event{
-    int itemId;
-    int participantId;
+    long itemId;
+    long participantId;
 }
