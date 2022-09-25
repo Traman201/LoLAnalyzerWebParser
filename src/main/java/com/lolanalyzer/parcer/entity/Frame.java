@@ -1,7 +1,7 @@
 package com.lolanalyzer.parcer.entity;
 
 
-import com.lolanalyzer.parcer.entytiId.EventId;
+import com.lolanalyzer.parcer.entity.events.Event;
 import com.lolanalyzer.parcer.entytiId.FrameId;
 import lombok.Getter;
 import lombok.Setter;
