@@ -9,7 +9,8 @@ public class ItemUndoAPI extends AbstractEventAPI{
 
     @Override
     public ItemUndo parseEvent(JSONObject o, Frame parentFrame) {
-        ItemUndo itemUndo = (ItemUndo) super.parseEvent(o, parentFrame);
+        ItemUndo itemUndo = new ItemUndo();
+        itemUndo.setId(getEventId(o, parentFrame));
 
         itemUndo.setAfterId(o.getLong("afterId"));
         itemUndo.setBeforeId(o.getLong("beforeId"));

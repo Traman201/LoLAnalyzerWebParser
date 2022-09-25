@@ -9,7 +9,8 @@ public class ItemPurchasedAPI extends AbstractEventAPI{
 
     @Override
     public ItemPurchased parseEvent(JSONObject o, Frame parentFrame) {
-        ItemPurchased itemPurchased = (ItemPurchased) super.parseEvent(o, parentFrame);
+        ItemPurchased itemPurchased = new ItemPurchased();
+        itemPurchased.setId(getEventId(o, parentFrame));
 
         itemPurchased.setItemId(o.getLong("itemId"));
         itemPurchased.setParticipantId(o.getLong("participantId"));

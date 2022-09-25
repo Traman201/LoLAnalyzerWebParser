@@ -10,7 +10,8 @@ public class WardKillAPI extends AbstractEventAPI {
 
     @Override
     public WardKill parseEvent(JSONObject o, Frame parentFrame) {
-        WardKill wardKill = (WardKill) super.parseEvent(o, parentFrame);
+        WardKill wardKill = new WardKill();
+        wardKill.setId(getEventId(o, parentFrame));
 
         wardKill.setWardType(o.getString("wardType"));
         wardKill.setKillerId(o.getLong("killerId"));

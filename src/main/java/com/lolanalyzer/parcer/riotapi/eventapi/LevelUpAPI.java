@@ -9,10 +9,11 @@ public class LevelUpAPI extends AbstractEventAPI{
 
     @Override
     public LevelUp parseEvent(JSONObject o, Frame parentFrame) {
-        LevelUp levelUp = (LevelUp) super.parseEvent(o, parentFrame);
+        LevelUp levelUp = new LevelUp();
+        levelUp.setId(getEventId(o, parentFrame));
 
         levelUp.setLevel(o.getLong("level"));
-        levelUp.setParticipantId(o.getLong("4"));
+        levelUp.setParticipantId(o.getLong("participantId"));
 
         return levelUp;
     }

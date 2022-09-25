@@ -9,7 +9,8 @@ public class SkillLevelUpAPI extends AbstractEventAPI{
 
     @Override
     public SkillLevelUp parseEvent(JSONObject o, Frame parentFrame) {
-        SkillLevelUp skillLevelUp = (SkillLevelUp) super.parseEvent(o, parentFrame);
+        SkillLevelUp skillLevelUp = new SkillLevelUp();
+        skillLevelUp.setId(getEventId(o, parentFrame));
 
         skillLevelUp.setLevelUpType(o.getString("levelUpType"));
         skillLevelUp.setParticipantId(o.getLong("participantId"));

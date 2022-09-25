@@ -16,4 +16,10 @@ public class AbstractEventAPI {
         event.setId(id);
         return event;
     }
+    public EventId getEventId(JSONObject o, Frame parentFrame){
+        EventId id = new EventId();
+        id.setFrameId(parentFrame.getId());
+        id.setPreciseTimestamp(o.getLong("timestamp"));
+        return id;
+    }
 }

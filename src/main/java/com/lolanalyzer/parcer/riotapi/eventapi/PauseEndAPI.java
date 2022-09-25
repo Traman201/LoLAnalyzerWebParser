@@ -10,7 +10,8 @@ public class PauseEndAPI extends AbstractEventAPI{
 
     @Override
     public PauseEnd parseEvent(JSONObject o, Frame parentFrame){
-        PauseEnd event = (PauseEnd) super.parseEvent(o, parentFrame);
+        PauseEnd event = new PauseEnd();
+        event.setId(getEventId(o, parentFrame));
 
         event.setRealTimeStamp(o.getLong("realTimestamp"));
         return event;

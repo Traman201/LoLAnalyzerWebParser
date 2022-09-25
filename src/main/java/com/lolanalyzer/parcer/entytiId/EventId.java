@@ -1,6 +1,5 @@
 package com.lolanalyzer.parcer.entytiId;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +12,19 @@ import java.io.Serializable;
 @Getter
 @Embeddable
 public class EventId implements Serializable {
+
+    long id;
+
     long preciseTimestamp;
     FrameId frameId;
+
+    public EventId(){
+        id = createID();
+    }
+    private static long idCounter = 0;
+
+    public static synchronized long createID()
+    {
+        return idCounter++;
+    }
 }

@@ -11,7 +11,8 @@ public class TurretPlateDestroyedAPI extends AbstractEventAPI{
 
     @Override
     public TurretPlateDestroyed parseEvent(JSONObject o, Frame parentFrame) {
-        TurretPlateDestroyed turretPlateDestroyed = (TurretPlateDestroyed) super.parseEvent(o, parentFrame);
+        TurretPlateDestroyed turretPlateDestroyed = new TurretPlateDestroyed();
+        turretPlateDestroyed.setId(getEventId(o, parentFrame));
 
         turretPlateDestroyed.setKillerId(o.getLong("killerId"));
         turretPlateDestroyed.setLaneType(o.getString("laneType"));

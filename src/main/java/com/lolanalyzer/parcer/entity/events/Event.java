@@ -20,4 +20,8 @@ public class Event {
     @EmbeddedId
     EventId id;
 
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName();
+    }
 }

@@ -9,7 +9,8 @@ public class ObjectiveBountyPrestartAPI extends AbstractEventAPI{
 
     @Override
     public ObjectiveBountyPrestart parseEvent(JSONObject o, Frame parentFrame) {
-        ObjectiveBountyPrestart bountyPrestart = (ObjectiveBountyPrestart) super.parseEvent(o, parentFrame);
+        ObjectiveBountyPrestart bountyPrestart = new ObjectiveBountyPrestart();
+        bountyPrestart.setId(getEventId(o, parentFrame));
 
         bountyPrestart.setActualStartTime(o.getLong("actualStartTime"));
         bountyPrestart.setTeamId(o.getLong("teamId"));
