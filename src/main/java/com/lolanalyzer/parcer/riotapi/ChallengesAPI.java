@@ -1,6 +1,6 @@
 package com.lolanalyzer.parcer.riotapi;
 
-import com.lolanalyzer.parcer.entity.Challenges;
+import com.lolanalyzer.parcer.embeddedparams.Challenges;
 import org.json.JSONObject;
 
 public class ChallengesAPI {

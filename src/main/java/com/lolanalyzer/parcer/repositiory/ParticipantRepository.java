@@ -1,11 +1,10 @@
 package com.lolanalyzer.parcer.repositiory;
 
-import com.lolanalyzer.parcer.entity.MatchId;
+import com.lolanalyzer.parcer.entytiId.MatchId;
 import com.lolanalyzer.parcer.entity.Participant;
-import com.lolanalyzer.parcer.entity.ParticipantId;
+import com.lolanalyzer.parcer.entytiId.ParticipantId;
 import org.springframework.data.repository.CrudRepository;
 
-import javax.servlet.http.Part;
 import java.util.Optional;
 
 public interface ParticipantRepository extends CrudRepository<Participant, ParticipantId> {

@@ -1,4 +1,4 @@
-package com.lolanalyzer.parcer.entity;
+package com.lolanalyzer.parcer.entytiId;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,8 +11,7 @@ import java.io.Serializable;
 @Setter
 @Slf4j
 @Embeddable
-public class ParticipantId implements Serializable {
-    private String puuid;
-    private MatchId matchId;
-
+public class MatchId implements Serializable {
+    private long gameId;
+    private String platformId;
 }

@@ -1,5 +1,7 @@
 package com.lolanalyzer.parcer.entity;
 
+import com.lolanalyzer.parcer.embeddedparams.Challenges;
+import com.lolanalyzer.parcer.entytiId.ParticipantId;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;

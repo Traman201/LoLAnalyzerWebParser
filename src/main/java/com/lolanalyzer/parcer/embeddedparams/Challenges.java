@@ -1,4 +1,4 @@
-package com.lolanalyzer.parcer.entity;
+package com.lolanalyzer.parcer.embeddedparams;
 
 import lombok.Getter;
 import lombok.Setter;

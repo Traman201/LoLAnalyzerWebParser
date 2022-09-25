@@ -1,9 +1,8 @@
 package com.lolanalyzer.parcer.riotapi;
 
 import com.lolanalyzer.parcer.entity.Match;
-import com.lolanalyzer.parcer.entity.MatchId;
+import com.lolanalyzer.parcer.entytiId.MatchId;
 import com.lolanalyzer.parcer.entity.Participant;
-import com.lolanalyzer.parcer.repositiory.ParticipantRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -101,6 +100,7 @@ public class MatchAPI {
             match.getNumericData().put(numericValueKey, info.getLong(numericValueKey));
         }
         match.setParticipants(getParticipants(info.getJSONArray("participants"), id));
+        match.setTimeline(TimelineAPI.getTimeline(matchId));
         return match;
     }
     public static ArrayList<Participant> getParticipants(JSONArray participantsJSON, MatchId matchId){
@@ -110,4 +110,5 @@ public class MatchAPI {
         }
         return participants;
     }
+
 }

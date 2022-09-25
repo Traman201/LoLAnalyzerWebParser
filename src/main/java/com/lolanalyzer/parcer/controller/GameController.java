@@ -1,9 +1,11 @@
 package com.lolanalyzer.parcer.controller;
 
+import com.lolanalyzer.parcer.entity.Frame;
 import com.lolanalyzer.parcer.entity.Match;
 import com.lolanalyzer.parcer.entity.Participant;
-import com.lolanalyzer.parcer.repositiory.GameRepository;
-import com.lolanalyzer.parcer.repositiory.ParticipantRepository;
+import com.lolanalyzer.parcer.entity.ParticipantFrame;
+import com.lolanalyzer.parcer.entity.events.Event;
+import com.lolanalyzer.parcer.repositiory.*;
 import com.lolanalyzer.parcer.riotapi.MatchAPI;
 import com.lolanalyzer.parcer.riotapi.RiotAPIConfiguration;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +18,7 @@ import javax.servlet.http.Part;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Optional;
 
 @Controller
 @Slf4j
@@ -24,12 +27,31 @@ public class GameController {
 
     private GameRepository gameRepository;
     private ParticipantRepository participantRepository;
+    private TimelineRepository timelineRepository;
+
+    private FrameRepository frameRepository;
+
+    private ParticipantFrameRepository participantFrameRepository;
+
+    private EventRepository eventRepository;
 
     @Autowired
-    public GameController(GameRepository gameRepository, ParticipantRepository participantRepository){
+    public GameController(GameRepository gameRepository,
+                          ParticipantRepository participantRepository,
+                          TimelineRepository timelineRepository,
+                          ParticipantFrameRepository participantFrameRepository,
+                          FrameRepository frameRepository,
+                          EventRepository eventRepository){
         this.gameRepository = gameRepository;
         this.participantRepository = participantRepository;
+        this.timelineRepository = timelineRepository;
+        this.frameRepository = frameRepository;
+        this.participantFrameRepository = participantFrameRepository;
+        this.eventRepository = eventRepository;
+
     }
+
+
     @GetMapping
     public String gameForm(Model model){
         ArrayList<Match> games = (ArrayList<Match>) gameRepository.findAll();
@@ -54,16 +76,30 @@ public class GameController {
 
         try {
             Match match = MatchAPI.getMatch(matchID);
-            for(Participant participant : match.getParticipants()){
-                participantRepository.save(participant);
-            }
-            gameRepository.save(match);
+            saveMatch(match);
         } catch (IOException e) {
 
             throw new RuntimeException(e);
         }
 
         return "redirect:/game";
+    }
+
+    private void saveMatch(Match match){
+        for(Participant participant : match.getParticipants()){
+            participantRepository.save(participant);
+        }
+        for(Frame frame : match.getTimeline().getFrames()){
+            for(ParticipantFrame pf : frame.getParticipantFrames()){
+                participantFrameRepository.save(pf);
+            }
+            for(Event event : frame.getEvents()){
+                eventRepository.save(event);
+            }
+            frameRepository.save(frame);
+        }
+        timelineRepository.save(match.getTimeline());
+        gameRepository.save(match);
     }
 
 
