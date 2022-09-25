@@ -11,7 +11,6 @@ import javax.persistence.Entity;
 @Getter
 @Setter
 public class GameEnd extends Event{
-    long gameId;
     long realTimeStamp;
     long winningTeam;
 }

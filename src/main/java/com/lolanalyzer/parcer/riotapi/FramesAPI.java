@@ -3,6 +3,7 @@ package com.lolanalyzer.parcer.riotapi;
 import com.lolanalyzer.parcer.entity.Frame;
 import com.lolanalyzer.parcer.entity.ParticipantFrame;
 import com.lolanalyzer.parcer.entity.Timeline;
+import com.lolanalyzer.parcer.entity.events.Event;
 import com.lolanalyzer.parcer.entytiId.FrameId;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
@@ -44,6 +45,14 @@ public class FramesAPI {
             );
         }
         frame.setParticipantFrames(participantFrames);
+
+        ArrayList<Event> events = new ArrayList<>();
+
+        JSONArray eventsJSON = frameJSON.getJSONArray("events");
+        for(Object o : eventsJSON){
+            events.add(EventAPI.parseEvent((JSONObject) o, frame));
+        }
+
 
         return frame;
     }
