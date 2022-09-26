@@ -1,8 +1,10 @@
 package com.lolanalyzer.parcer.riotapi;
 
+import com.lolanalyzer.parcer.embeddedparams.Challenges;
 import com.lolanalyzer.parcer.entytiId.MatchId;
 import com.lolanalyzer.parcer.entity.Participant;
 import com.lolanalyzer.parcer.entytiId.ParticipantId;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ParticipantAPI {
@@ -145,7 +147,12 @@ public class ParticipantAPI {
         for(String boolKey : getPossibleBooleanValueKeys()){
             participant.getBooleanData().put(boolKey, participantJSON.getBoolean(boolKey));
         }
-        participant.setChallenges(ChallengesAPI.parseChallenges(participantJSON.getJSONObject("challenges")));
+        try{
+            participant.setChallenges(ChallengesAPI.parseChallenges(participantJSON.getJSONObject("challenges")));
+        }catch (JSONException e){
+            participant.setChallenges(new Challenges());
+        }
+
         return participant;
     }
 }

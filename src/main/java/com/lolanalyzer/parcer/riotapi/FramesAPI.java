@@ -61,7 +61,7 @@ public class FramesAPI {
             * Некоторых ивентов нет в списке, ведется их учет в файл
             * */
             if(!EventAPIMap.getInstance().getEventAPIMap().containsKey(((JSONObject) o).getString("type"))){
-                logger.info("Non-existent event type: " + ((JSONObject) o).getString("type") + "\n");
+                logger.warn("Non-existent event type: " + ((JSONObject) o).getString("type") + "\n");
                 continue;
             }
             events.add(EventAPI.parseEvent((JSONObject) o, frame));
