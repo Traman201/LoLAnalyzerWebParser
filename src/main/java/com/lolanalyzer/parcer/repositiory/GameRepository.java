@@ -13,4 +13,5 @@ public interface GameRepository extends CrudRepository<Match, MatchId> {
     Iterable<Match> findAll();
 
     Optional<Match> findById(MatchId id);
+
 }
