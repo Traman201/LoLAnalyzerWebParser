@@ -66,6 +66,9 @@ public class GameController {
     public String saveMatchesLLA14(@RequestParam String path, @RequestParam boolean save) {
         ArrayList<Match> games = (ArrayList<Match>) matchManager.getGameRepository().findAll();
         for(Match m : games){
+            if(!m.getTextData().get("gameMode").equals("CLASSIC")){
+                continue;
+            }
             ArrayList<String> specData = new ArrayList<>();
 
             String matchWinData = "";
@@ -80,13 +83,19 @@ public class GameController {
             for(Frame frame : m.getTimeline().getFrames()){
                 for (ParticipantFrame pf : frame.getParticipantFrames()) {
                     String spec = "";
-                    spec += (Long.toString(frame.getId().getTimestamp())) + ";";
-                    spec += Long.toString(pf.getId().getParticipantId()) + ";";
-                    spec += Long.toString(pf.getFrameValues().get("totalGold")) + ";";
-                    spec += Long.toString(pf.getChampionStats().getStats().get("abilityPower")) + ";";
-                    spec += Long.toString(pf.getChampionStats().getStats().get("attackDamage")) + ";";
-                    spec += Long.toString(pf.getChampionStats().getStats().get("magicResist")) + ";";
-                    spec += Long.toString(pf.getChampionStats().getStats().get("armor")) + ";";
+                    try{
+                        spec += (Long.toString(frame.getId().getTimestamp())) + ";";
+                        spec += Long.toString(pf.getId().getParticipantId()) + ";";
+                        spec += Long.toString(pf.getFrameValues().get("totalGold")) + ";";
+                        spec += Long.toString(pf.getChampionStats().getStats().get("abilityPower")) + ";";
+                        spec += Long.toString(pf.getChampionStats().getStats().get("attackDamage")) + ";";
+                        spec += Long.toString(pf.getChampionStats().getStats().get("magicResist")) + ";";
+                        spec += Long.toString(pf.getChampionStats().getStats().get("armor")) + ";";
+                    }catch (Exception e){
+                        log.info(spec);
+                        continue;
+                    }
+
 
 
                     for (Event e : frame.getEvents()) {
