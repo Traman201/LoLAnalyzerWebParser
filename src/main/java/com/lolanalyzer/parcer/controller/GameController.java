@@ -65,6 +65,7 @@ public class GameController {
     @PostMapping("/save")
     public String saveMatchesLLA14(@RequestParam String path, @RequestParam boolean save) {
         ArrayList<Match> games = (ArrayList<Match>) matchManager.getGameRepository().findAll();
+        mainLoop:
         for(Match m : games){
             if(!m.getTextData().get("gameMode").equals("CLASSIC")){
                 continue;
@@ -92,8 +93,7 @@ public class GameController {
                         spec += Long.toString(pf.getChampionStats().getStats().get("magicResist")) + ";";
                         spec += Long.toString(pf.getChampionStats().getStats().get("armor")) + ";";
                     }catch (Exception e){
-                        log.info(spec);
-                        continue;
+                        continue mainLoop;
                     }
 
 
