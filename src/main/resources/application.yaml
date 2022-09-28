@@ -5,6 +5,7 @@ spring:
         encoding: UTF-8
         prefix: file:src/main/resources/templates/
 
+
 ---
 spring:
     config:
@@ -13,18 +14,22 @@ spring:
     datasource:
         username: sa
         password: password
+        url: ${DATABASE_PATH}
         driverClassName: org.h2.Driver
         generate-unique-name: false
-        name: Games
+        name: ${DATABASE_NAME}
         jpa:
-            spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+            database-platform: org.hibernate.dialect.H2Dialect
+            hibernate:
+                ddl-auto: update
 
-    h2:
-        console:
-            enabled: true
-            settings:
-                web-allow-others: true
 
+
+        h2:
+            console:
+                enabled: true
+                settings:
+                    web-allow-others: true
 logging:
     file:
         name: log/log.log

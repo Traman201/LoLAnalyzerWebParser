@@ -16,6 +16,11 @@
 	<properties>
 		<java.version>17</java.version>
 	</properties>
+	<profiles>
+    <profile>
+        <id>psdev</id>
+    </profile>
+</profiles>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

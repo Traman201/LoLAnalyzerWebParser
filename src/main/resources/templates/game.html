@@ -18,6 +18,13 @@
             <button class="btn btn-outline-secondary" type="submit">Send</button>
         </div>
     </form>
+    <form method="post" th:action="@{/game/save}">
+        <input type="text" class="form-control" placeholder="путь"  aria-describedby="basic-addon2" name="path">
+        <br>
+        <div class="input-group-append" style="margin-top:10px">
+            <button class="btn btn-outline-secondary" type="submit" name="save" value="true">Выписать в файл</button>
+        </div>
+    </form>
 
 </div>
 <table class="table">
