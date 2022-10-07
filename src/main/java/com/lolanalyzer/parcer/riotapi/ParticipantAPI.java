@@ -1,9 +1,11 @@
 package com.lolanalyzer.parcer.riotapi;
 
-import com.lolanalyzer.parcer.embeddedparams.Challenges;
+import com.lolanalyzer.parcer.embeddedparams.*;
+import com.lolanalyzer.parcer.entity.Perks;
 import com.lolanalyzer.parcer.entytiId.MatchId;
 import com.lolanalyzer.parcer.entity.Participant;
 import com.lolanalyzer.parcer.entytiId.ParticipantId;
+import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,6 +22,7 @@ public class ParticipantAPI {
                 "summonerId",
                 "summonerName",
                 "teamPosition",
+                "description",
         };
     }
     public static String[] getPossibleNumericValueKeys(){
@@ -110,7 +113,15 @@ public class ParticipantAPI {
                 "visionScore",
                 "visionWardsBoughtInGame",
                 "wardsKilled",
-                "wardsPlaced"
+                "wardsPlaced",
+                "defense",
+                "flex",
+                "offense",
+                "style",
+                "perk",
+                "var1",
+                "var2",
+                "var3",
 
         };
     }
@@ -139,13 +150,20 @@ public class ParticipantAPI {
         participant.setId(pId);
 
         for(String textKey : getPossibleTextValueKeys()){
-            participant.getTextData().put(textKey, participantJSON.getString(textKey));
+            try {
+                participant.getTextData().put(textKey, participantJSON.getString(textKey));
+            } catch (JSONException e) {};
         }
         for(String numericKey : getPossibleNumericValueKeys()){
-            participant.getNumericData().put(numericKey, participantJSON.getLong(numericKey));
+            try {
+                participant.getNumericData().put(numericKey, participantJSON.getLong(numericKey));
+            } catch (JSONException e) {};
+
         }
         for(String boolKey : getPossibleBooleanValueKeys()){
-            participant.getBooleanData().put(boolKey, participantJSON.getBoolean(boolKey));
+            try {
+                participant.getBooleanData().put(boolKey, participantJSON.getBoolean(boolKey));
+            } catch (JSONException e) {};
         }
         try{
             participant.setChallenges(ChallengesAPI.parseChallenges(participantJSON.getJSONObject("challenges")));
@@ -153,6 +171,77 @@ public class ParticipantAPI {
             participant.setChallenges(new Challenges());
         }
 
+        try{
+            participant.setPerks(parsePerks(participantJSON.getJSONObject("perks")));
+        }catch (JSONException e){
+            participant.setPerks(new Perks());
+        }
+
         return participant;
+    }
+
+    public static Perks parsePerks(JSONObject perksJSON){
+        Perks perks = new Perks();
+        PerkStats perkStats = new PerkStats();
+
+
+        var perkStatsJSON = perksJSON.getJSONObject("statPerks");
+
+        for(String longKey : getPossibleNumericValueKeys()) {
+            try {
+                perkStats.getLongValues().put(longKey, perkStatsJSON.getLong(longKey));
+            } catch (Exception e) {
+                perkStats.getLongValues().put(longKey, null);
+            }
+        }
+
+        perks.setStatPerks(perkStats);
+
+        var perkStyleJSON = perksJSON.getJSONArray("styles");
+        for (var i = 0; i < perkStyleJSON.length(); i++) {
+            PerkStyle perkStyle = new PerkStyle();
+
+            for (String longKey : getPossibleNumericValueKeys()) {
+                try {
+                    perkStyle.getLongValues().put(longKey, perkStyleJSON.getJSONObject(i).getLong(longKey));
+                } catch (Exception e) {
+                    perkStyle.getLongValues().put(longKey, null);
+                }
+            }
+
+            for (String textKey : getPossibleTextValueKeys()) {
+                try {
+                    perkStyle.getTextData().put(textKey, perkStyleJSON.getJSONObject(i).getString(textKey));
+                } catch (Exception e) {
+                    perkStyle.getTextData().put(textKey, null);
+                }
+            }
+
+            var selectionsJSON = perkStyleJSON.getJSONObject(i).getJSONArray("selections");
+            for (var j = 0; j < selectionsJSON.length(); j++) {
+                PerkStyleSelection perkStyleSelection = new PerkStyleSelection();
+
+                for (String longKey : getPossibleNumericValueKeys()) {
+                    try {
+                        perkStyleSelection.getLongValues().put(longKey, selectionsJSON.getJSONObject(j).getLong(longKey));
+                    } catch (Exception e) {
+                        perkStyleSelection.getLongValues().put(longKey, null);
+                    }
+                }
+
+                perkStyle.getSelections().add(perkStyleSelection);
+            }
+
+            if (i == 0)
+            {
+                perks.setPrimaryStyle(perkStyle);
+            }
+            else if (i == 2)
+            {
+                perks.setSubStyle(perkStyle);
+            }
+        }
+
+        return perks;
     }
 }

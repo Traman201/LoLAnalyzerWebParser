@@ -22,6 +22,9 @@ public class Participant {
     @Embedded
     Challenges challenges;
 
+    @ManyToOne(cascade=CascadeType.ALL)
+    Perks perks;
+
     @ElementCollection
     Map<String, String> textData;
 
