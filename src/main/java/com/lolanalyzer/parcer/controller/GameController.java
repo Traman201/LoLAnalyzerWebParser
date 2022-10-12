@@ -1,66 +1,61 @@
 package com.lolanalyzer.parcer.controller;
 
-import com.lolanalyzer.parcer.entity.Game;
-import com.lolanalyzer.parcer.repositiory.GameRepository;
+import com.lolanalyzer.parcer.entity.Match;
+import com.lolanalyzer.parcer.entity.Participant;
+import com.lolanalyzer.parcer.riotapi.MatchAPI;
+import com.lolanalyzer.parcer.riotapi.RiotAPIConfiguration;
+import com.lolanalyzer.parcer.service.MatchRepositoryManager;
 import lombok.extern.slf4j.Slf4j;
-import netscape.javascript.JSObject;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.json.JsonParser;
-import org.springframework.boot.json.JsonParserFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
-
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.Objects;
 
 @Controller
 @Slf4j
 @RequestMapping("/game")
 public class GameController {
 
-    private GameRepository gameRepository;
-
     @Autowired
-    public GameController(GameRepository gameRepository){
-        this.gameRepository = gameRepository;
-    }
+    MatchRepositoryManager matchManager;
+
+
     @GetMapping
     public String gameForm(Model model){
-        ArrayList<Game> games = (ArrayList<Game>) gameRepository.findAll();
+        ArrayList<Match> games = (ArrayList<Match>) matchManager.getGameRepository().findAll();
         model.addAttribute("games", games);
 
         return "game";
     }
+    @GetMapping("/{matchId}")
+    public String matchInfoForm(Model model, @PathVariable String matchId){
 
-    @PostMapping("/add")
-    public String addGame(@RequestBody String gameInfo) {
+        ArrayList<Participant> participants = new ArrayList<>();
 
-        JSONObject root = new JSONObject(gameInfo);
-        JSONObject metadata = root.getJSONObject("metadata");
+        participants = (ArrayList<Participant>) matchManager.getParticipantRepository().findAllByIdMatchId(MatchAPI.constructMatchId(matchId));
+        model.addAttribute("participants", participants);
 
-        JSONObject info = root.getJSONObject("info");
+        return "matchInfo";
+    }
 
-        Game game = new Game();
+    @PostMapping()
+    public String addGame(@RequestParam String matchID, @RequestParam String apiKey) {
+        RiotAPIConfiguration.getInstance().setApiKey(apiKey);
 
-        game.setGameCreation(info.getLong("gameCreation"));
-        game.setGameDuration(info.getLong("gameDuration"));
-        game.setGameMode(info.getString("gameMode"));
-        game.setGameName(info.getString("gameName"));
-        game.setGameType(info.getString("gameType"));
-        game.setGameVersion(info.getString("gameVersion"));
-        game.setGameEndTimestamp(info.getLong("gameEndTimestamp"));
-        game.setGameStartTimestamp(info.getLong("gameStartTimestamp"));
-        game.setMatchId(metadata.getString("matchId"));
+        try {
+            Match match = MatchAPI.getMatch(matchID);
+            matchManager.saveMatch(match);
+        } catch (IOException e) {
 
-        gameRepository.save(game);
-
-        log.info(metadata.getString("matchId"));
+            throw new RuntimeException(e);
+        }
 
         return "redirect:/game";
     }
+
+
+
 }
