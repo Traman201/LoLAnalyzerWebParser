@@ -10,6 +10,11 @@ spring:
     config:
         activate:
             on-profile: psdev
+    jpa:
+        database-platform: ${DATABASE_PLATFORM}
+        hibernate:
+            ddl-auto: update
+
     datasource:
         username: ${DATABASE_USER_NAME}
         password: ${DATABASE_USER_PASSWORD}
@@ -17,10 +22,6 @@ spring:
         driverClassName: ${DATABASE_DRIVER_CLASS_NAME}
         generate-unique-name: false
         name: ${DATABASE_NAME}
-        jpa:
-            database-platform: ${DATABASE_PLATFORM}
-            hibernate:
-                ddl-auto: create
 
         h2:
             console:
