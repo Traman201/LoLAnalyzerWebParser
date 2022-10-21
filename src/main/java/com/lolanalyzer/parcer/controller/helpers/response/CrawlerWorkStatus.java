@@ -14,6 +14,7 @@ public class CrawlerWorkStatus {
 
     public String crawlerStatus;
     public long playerPool;
+    public long failedMatches;
 
 
 }

@@ -70,6 +70,7 @@ public class CrawlerController {
         dataSaverStatus.crawlerStatus = crawler.getStatus();
 
         dataSaverStatus.playerPool = crawler.getPlayerPool();
+        dataSaverStatus.failedMatches = crawler.getFailedMatches();
 
 
         return dataSaverStatus;

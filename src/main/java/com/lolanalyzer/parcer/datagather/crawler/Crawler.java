@@ -36,6 +36,8 @@ public class Crawler {
     private long remainingCount = 0;
     private long playerPool = 0;
 
+    private long failedMatches = 0;
+
     private boolean isCrawling = false;
     private boolean isRequestStop = false;
 
@@ -62,8 +64,9 @@ public class Crawler {
             try {
                 status = "Parsing recent matches from " + puuid;
                 matches.add(MatchAPI.getMatch((String) matchId));
-            } catch (IOException e) {
-                continue;
+            } catch (IOException | JSONException e) {
+                log.error("Failed to parse match " +  (String) matchId + " " + e.getMessage());
+                failedMatches++;
             }
         }
         return matches;
@@ -92,6 +95,7 @@ public class Crawler {
         status = "Initializing crawling";
         isCrawling = true;
         remainingCount = goal;
+        failedMatches = 0;
         ArrayDeque<String> puuids = new ArrayDeque<>();
         puuids.add(startName);
 
@@ -106,6 +110,7 @@ public class Crawler {
 
                 if(manager.hasMatch(m)){
                     log.info("Found existent match " + m.getId().getGameId());
+                    failedMatches++;
                     continue;
                 }
                 for(Participant p : m.getParticipants()){
@@ -115,8 +120,9 @@ public class Crawler {
 
                 }
                 if(!m.getTextData().get("gameMode").equals("CLASSIC")){
-                    log.info("This match is not in classic mode " + m.getId().getGameId() +
-                            " It is in " + m.getTextData().get("gameMode") + " instead");
+                    log.info("This match is not classic mode " + m.getId().getGameId() +
+                            " It is " + m.getTextData().get("gameMode") + " instead");
+                    failedMatches++;
                     continue;
                 }
 

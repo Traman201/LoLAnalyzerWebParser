@@ -21,7 +21,7 @@
 
 <div id="crawlerInfo" class="alert alert-primary" role="alert">
   <h3 id="dataSaverQueueSize"></h3>
-  <h4>Нагрузка очереди</h4>
+  <h4>Queue load</h4>
   <div class="progress">
     <div class="progress-bar" role="progressbar"  style="width: 25%" id="dataSaverQueueLoad" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
   </div>
@@ -44,13 +44,14 @@ var intervalId = setInterval(function() {
         url: "/crawler/status",
 
         success: function(response){
-              $('#dataSaverQueueSize').html("Игр в очереди на запись: " + response.inQueue);
+              $('#dataSaverQueueSize').html("Games in database queue: " + response.inQueue);
               $('#dataSaverQueueLoad').css('width',  response.inQueue * 100.0 / response.maxQueue + '%');
               $('#dataSaverQueueLoad').html(response.inQueue * 100.0 / response.maxQueue + '%');
               if(response.isCrawlerWorking){
                  $('#crawlerWorkInfo').html(
                     "<h3>Crawler is crawling. Remaining " + response.remainingCount + "</h3>" +
-                    "<h3>Players to examine: " + response.playerPool + "</h3>"
+                    "<h3>Players to examine: " + response.playerPool + "</h3>" +
+                    "<h4>Dataset integrity: " + response.failedMatches / (response.failedMatches + response.remainingCount) * 100.0 + "%</h4>"
                  );
               }
               else{
