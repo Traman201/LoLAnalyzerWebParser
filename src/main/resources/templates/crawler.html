@@ -11,7 +11,7 @@
 <form method="post">
   <input type="number" class="form-control" placeholder="numberofMatches"  aria-describedby="basic-addon2" name="numMatches">
   <br>
-  <input type="text" class="form-control" placeholder="api Key"  aria-describedby="basic-addon2" name="apiKey">
+  <input type="text" class="form-control" placeholder="api Key"  aria-describedby="basic-addon2" name="apiKey" th:value="${apikey}">
   <br>
   <input type="text" class="form-control" placeholder="start puuid"  aria-describedby="basic-addon2" name="puuid">
   <div class="input-group-append" style="margin-top:10px">
@@ -19,26 +19,57 @@
   </div>
 </form>
 
-<h3>
-  В базе данных <th:block th:text="${count}"></th:block> записей.
-</h3>
+<div id="crawlerInfo" class="alert alert-primary" role="alert">
+  <h3 id="dataSaverQueueSize"></h3>
+  <h4>Нагрузка очереди</h4>
+  <div class="progress">
+    <div class="progress-bar" role="progressbar"  style="width: 25%" id="dataSaverQueueLoad" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+</div>
 <br>
-<h3>
-  <th:block th:if="${crawler.isCrawling}" >
-    Crawler is crawling. Remaining: <th:block th:text="${crawler.getRemainingCount()}"></th:block>
-  </th:block>
-  <th:block th:if="${!crawler.isCrawling}">
-    Crawler is resting.
-  </th:block>
-</h3>
 
+<div class="alert alert-secondary" role="alert" id="crawlerWorkInfo">
+
+</div>
+<div class="alert alert-info" role="alert" id="crawlerWorkStatus"></div>
 <form method="get">
   <button class="btn btn-outline-secondary" type="submit" name="requestStop" value="yes">Запросить остановку</button>
 </form>
 
+<script type="text/javascript">
+
+var intervalId = setInterval(function() {
+  $.ajax({
+        type: "GET",
+        url: "/crawler/status",
+
+        success: function(response){
+              $('#dataSaverQueueSize').html("Игр в очереди на запись: " + response.inQueue);
+              $('#dataSaverQueueLoad').css('width',  response.inQueue * 100.0 / response.maxQueue + '%');
+              $('#dataSaverQueueLoad').html(response.inQueue * 100.0 / response.maxQueue + '%');
+              if(response.isCrawlerWorking){
+                 $('#crawlerWorkInfo').html(
+                    "<h3>Crawler is crawling. Remaining " + response.remainingCount + "</h3>" +
+                    "<h3>Players to examine: " + response.playerPool + "</h3>"
+                 );
+              }
+              else{
+                 $('#crawlerWorkInfo').html(
+                    "<h3>Crawler is resting</h3>"
+                 );
+              }
+              $('#crawlerWorkStatus').html(
+                  '<h4>' + response.crawlerStatus + '</h4>'
+              );
 
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+         }
+    });
+}, 1000);
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>

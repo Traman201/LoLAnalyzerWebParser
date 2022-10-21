@@ -44,6 +44,9 @@ public class MatchRepositoryManager {
 
     @Transactional
     public boolean saveMatch(Match match){
+        if(gameRepository.findById(match.getId()).isPresent()){
+            return false;
+        }
         for(Participant participant : match.getParticipants()){
             participantRepository.save(participant);
         }
@@ -57,11 +60,11 @@ public class MatchRepositoryManager {
             frameRepository.save(frame);
         }
         timelineRepository.save(match.getTimeline());
-        if(gameRepository.save(match) != null){
-            return true;
-        }
-        else {
-            return false;
-        }
+        gameRepository.save(match);
+        return true;
+    }
+
+    public boolean hasMatch(Match match){
+        return gameRepository.findById(match.getId()).isPresent();
     }
 }
