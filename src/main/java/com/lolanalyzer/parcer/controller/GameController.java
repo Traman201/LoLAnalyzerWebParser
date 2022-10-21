@@ -44,10 +44,16 @@ public class GameController {
     @PostMapping()
     public String addGame(@RequestParam String matchID, @RequestParam String apiKey) {
         RiotAPIConfiguration.getInstance().setApiKey(apiKey);
-
+        long startTime = System.currentTimeMillis();
+        long parsedTime;
+        long savedTime;
         try {
             Match match = MatchAPI.getMatch(matchID);
+            parsedTime = System.currentTimeMillis();
             matchManager.saveMatch(match);
+            savedTime = System.currentTimeMillis();
+
+            log.info("Parsed in " + (parsedTime - startTime) / 1000.0 + " Saved in " + (savedTime - parsedTime) / 1000.0);
         } catch (IOException e) {
 
             throw new RuntimeException(e);

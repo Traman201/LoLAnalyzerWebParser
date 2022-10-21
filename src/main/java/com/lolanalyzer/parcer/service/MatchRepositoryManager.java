@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @Slf4j
@@ -41,6 +42,7 @@ public class MatchRepositoryManager {
 
     }
 
+    @Transactional
     public boolean saveMatch(Match match){
         for(Participant participant : match.getParticipants()){
             participantRepository.save(participant);
