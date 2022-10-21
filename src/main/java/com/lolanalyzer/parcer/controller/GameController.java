@@ -1,5 +1,7 @@
 package com.lolanalyzer.parcer.controller;
 
+import com.lolanalyzer.parcer.controller.helpers.GameControllerMessenger;
+import com.lolanalyzer.parcer.controller.helpers.Message;
 import com.lolanalyzer.parcer.entity.Match;
 import com.lolanalyzer.parcer.entity.Participant;
 import com.lolanalyzer.parcer.riotapi.MatchAPI;
@@ -22,11 +24,19 @@ public class GameController {
     @Autowired
     MatchRepositoryManager matchManager;
 
+    @Autowired
+    GameControllerMessenger messenger;
+
 
     @GetMapping
     public String gameForm(Model model){
         ArrayList<Match> games = (ArrayList<Match>) matchManager.getGameRepository().findAll();
         model.addAttribute("games", games);
+        model.addAttribute("apikey", RiotAPIConfiguration.getInstance().getApiKey());
+
+        if(messenger.hasMessages()){
+            model.addAttribute("messages", messenger.getMessages());
+        }
 
         return "game";
     }
@@ -50,14 +60,20 @@ public class GameController {
         try {
             Match match = MatchAPI.getMatch(matchID);
             parsedTime = System.currentTimeMillis();
-            matchManager.saveMatch(match);
+            log.info("[" + System.currentTimeMillis() + "]" + " DB writing");
+            if(!matchManager.saveMatch(match)){
+                messenger.addMessage("Ошибка записи в базу данных", Message.MessageType.ERROR);
+            }
+            else{
+                messenger.addMessage("Запись успешно добавлена", Message.MessageType.SUCCESS);
+            }
             savedTime = System.currentTimeMillis();
 
             log.info("Parsed in " + (parsedTime - startTime) / 1000.0 + " Saved in " + (savedTime - parsedTime) / 1000.0);
         } catch (IOException e) {
-
-            throw new RuntimeException(e);
+            messenger.addMessage("Ошибка получения информации о матче", Message.MessageType.ERROR);
         }
+
 
         return "redirect:/game";
     }

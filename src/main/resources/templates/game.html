@@ -9,11 +9,28 @@
 </head>
 <body>
 <h1>Games</h1>
+<th:block th:each="message : ${messages}">
+    <th:block th:if="${message.type.ordinal() == 0}">
+        <div class="alert alert-primary" role="alert">
+            <th:block th:text="${message.text}"> </th:block>
+        </div>
+    </th:block>
+    <th:block th:if="${message.type.ordinal() == 1}">
+        <div class="alert alert-danger" role="alert">
+            <th:block th:text="${message.text}"> </th:block>
+        </div>
+    </th:block>
+    <th:block th:if="${message.type.ordinal() == 2}">
+        <div class="alert alert-success" role="alert">
+            <th:block th:text="${message.text}"> </th:block>
+        </div>
+    </th:block>
+</th:block>
 <div class="input-group mb-3" style="margin: 20px; ">
     <form method="post">
         <input type="text" class="form-control" placeholder="matchId"  aria-describedby="basic-addon2" name="matchID">
         <br>
-        <input type="text" class="form-control" placeholder="api Key"  aria-describedby="basic-addon2" name="apiKey">
+        <input type="text" class="form-control" placeholder="api Key"  aria-describedby="basic-addon2" name="apiKey" th:value="${apikey}">
         <div class="input-group-append" style="margin-top:10px">
             <button class="btn btn-outline-secondary" type="submit">Send</button>
         </div>
