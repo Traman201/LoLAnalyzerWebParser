@@ -64,9 +64,12 @@ public class Crawler {
             try {
                 status = "Parsing recent matches from " + puuid;
                 matches.add(MatchAPI.getMatch((String) matchId));
-            } catch (IOException | JSONException e) {
-                log.error("Failed to parse match " +  (String) matchId + " " + e.getMessage());
+            } catch (JSONException e) {
+                log.error("Failed to parse a match " +  (String) matchId + " " + e.getMessage());
                 failedMatches++;
+            } catch (IOException e){
+                waitForReason(125000, "Failed to parse a match. Trying to wait.");
+                log.error("Failed to parse a match " +  (String) matchId + " " + e.getMessage());
             }
         }
         return matches;

@@ -44,7 +44,7 @@ var intervalId = setInterval(function() {
         url: "/crawler/status",
 
         success: function(response){
-              $('#dataSaverQueueSize').html("Games in database queue: " + response.inQueue);
+              $('#dataSaverQueueSize').html("Games in the database queue: " + response.inQueue);
               $('#dataSaverQueueLoad').css('width',  response.inQueue * 100.0 / response.maxQueue + '%');
               $('#dataSaverQueueLoad').html(response.inQueue * 100.0 / response.maxQueue + '%');
               if(response.isCrawlerWorking){
