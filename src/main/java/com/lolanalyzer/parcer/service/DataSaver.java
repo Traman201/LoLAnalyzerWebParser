@@ -10,7 +10,7 @@ import java.util.ArrayDeque;
 @Getter
 public class DataSaver {
 
-    private final int maxQueueSize = 250;
+    private final int maxQueueSize = 2000;
     boolean isBusySaving = false;
     @Autowired
     MatchRepositoryManager manager;

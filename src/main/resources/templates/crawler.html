@@ -51,7 +51,7 @@ var intervalId = setInterval(function() {
                  $('#crawlerWorkInfo').html(
                     "<h3>Crawler is crawling. Remaining " + response.remainingCount + "</h3>" +
                     "<h3>Players to examine: " + response.playerPool + "</h3>" +
-                    "<h4>Dataset integrity: " + response.failedMatches / (response.failedMatches + response.remainingCount) * 100.0 + "%</h4>"
+                    "<h4>Dataset integrity: " + response.datasetsCounter / (response.failedMatches + response.datasetsCounter) * 100.0 + "%</h4>"
                  );
               }
               else{
