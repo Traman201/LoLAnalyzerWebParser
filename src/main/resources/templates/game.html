@@ -26,17 +26,33 @@
         </div>
     </th:block>
 </th:block>
-<div class="input-group mb-3" style="margin: 20px; ">
-    <form method="post">
-        <input type="text" class="form-control" placeholder="matchId"  aria-describedby="basic-addon2" name="matchID">
-        <br>
-        <input type="text" class="form-control" placeholder="api Key"  aria-describedby="basic-addon2" name="apiKey" th:value="${apikey}">
-        <div class="input-group-append" style="margin-top:10px">
-            <button class="btn btn-outline-secondary" type="submit">Send</button>
-        </div>
-    </form>
 
+<div style="display: flex">
+    <div class="input-group mb-3" style="margin: 20px; ">
+        <form method="get" th:action="@{/game/dump}">
+            <select name="dumpType">
+                <th:block th:each="availableParse : ${availableParses}" >
+                    <option th:value="${availableParse}" th:text="${availableParse}"></option>
+                </th:block>
+            </select>
+            <br>
+            <div class="input-group-append" style="margin-top:10px">
+                <button class="btn btn-outline-secondary" type="submit">Загрузить</button>
+            </div>
+        </form>
+    </div>
+    <div class="input-group mb-3" style="align: right">
+        <form method="post">
+            <input type="text" class="form-control" placeholder="matchId"  aria-describedby="basic-addon2" name="matchID">
+            <br>
+            <input type="text" class="form-control" placeholder="api Key"  aria-describedby="basic-addon2" name="apiKey" th:value="${apikey}">
+            <div class="input-group-append" style="margin-top:10px">
+                <button class="btn btn-outline-secondary" type="submit">Send</button>
+            </div>
+        </form>
+    </div>
 </div>
+
 <table class="table">
     <thead class="thead-dark">
     <tr>

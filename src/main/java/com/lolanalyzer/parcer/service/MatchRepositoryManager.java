@@ -5,6 +5,7 @@ import com.lolanalyzer.parcer.entity.Match;
 import com.lolanalyzer.parcer.entity.Participant;
 import com.lolanalyzer.parcer.entity.ParticipantFrame;
 import com.lolanalyzer.parcer.entity.events.Event;
+import com.lolanalyzer.parcer.entytiId.MatchId;
 import com.lolanalyzer.parcer.repositiory.*;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -41,6 +42,7 @@ public class MatchRepositoryManager {
         this.eventRepository = eventRepository;
 
     }
+
 
     @Transactional
     public boolean saveMatch(Match match){
