@@ -5,6 +5,7 @@ import com.lolanalyzer.parcer.entity.Match;
 import com.lolanalyzer.parcer.entity.Participant;
 import com.lolanalyzer.parcer.entity.ParticipantFrame;
 import com.lolanalyzer.parcer.entity.events.Event;
+import com.lolanalyzer.parcer.entytiId.MatchId;
 import com.lolanalyzer.parcer.repositiory.*;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -42,8 +43,12 @@ public class MatchRepositoryManager {
 
     }
 
+
     @Transactional
     public boolean saveMatch(Match match){
+        if(gameRepository.findById(match.getId()).isPresent()){
+            return false;
+        }
         for(Participant participant : match.getParticipants()){
             participantRepository.save(participant);
         }
@@ -57,11 +62,11 @@ public class MatchRepositoryManager {
             frameRepository.save(frame);
         }
         timelineRepository.save(match.getTimeline());
-        if(gameRepository.save(match) != null){
-            return true;
-        }
-        else {
-            return false;
-        }
+        gameRepository.save(match);
+        return true;
+    }
+
+    public boolean hasMatch(Match match){
+        return gameRepository.findById(match.getId()).isPresent();
     }
 }

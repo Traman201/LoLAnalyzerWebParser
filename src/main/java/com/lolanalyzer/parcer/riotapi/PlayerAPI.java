@@ -35,8 +35,8 @@ public class PlayerAPI {
             return response.toString();
 
 
-        }catch (Exception e){
-            return null;
+        }catch (Exception e) {
+            return Integer.toString(con.getResponseCode());
         }
 
     }
