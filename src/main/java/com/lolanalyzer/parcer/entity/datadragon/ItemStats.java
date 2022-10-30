@@ -3,11 +3,8 @@ package com.lolanalyzer.parcer.entity.datadragon;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Primary;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,17 +12,20 @@ import java.util.Map;
 @Slf4j
 @Getter
 @Setter
-public class Champion {
+@Table(name = "item")
+public class ItemStats {
 
     @Id
-    String id;
+    long id;
 
     String name;
 
-    @ElementCollection
-    Map<String, Long> stats;
+    long totalGold;
 
-    public Champion(){
+    @ElementCollection(fetch = FetchType.EAGER)
+    Map<String, Double> stats;
+
+    public ItemStats(){
         stats = new HashMap<>();
     }
 }

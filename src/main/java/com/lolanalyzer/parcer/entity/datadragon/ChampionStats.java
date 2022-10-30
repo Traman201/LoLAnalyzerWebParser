@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,19 +15,17 @@ import java.util.Map;
 @Slf4j
 @Getter
 @Setter
-public class Item {
+public class ChampionStats {
 
     @Id
-    long id;
+    String id;
 
     String name;
 
-    long totalGold;
+    @ElementCollection(fetch = FetchType.EAGER)
+    Map<String, Double> stats;
 
-    @ElementCollection
-    Map<String, Long> stats;
-
-    public Item(){
+    public ChampionStats(){
         stats = new HashMap<>();
     }
 }
