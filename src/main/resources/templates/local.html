@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Local</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+
+<h1 id="title"></h1>
+<div style="display: flex">
+    <th:block th:each="champion : ${champions}">
+        <div th:id="${champion}" style="display: inline; margin-right: 15px">
+            <h6 class="name"></h6>
+            <th:block th:each="value : ${values}">
+                <h6 style="" th:class="${value}"></h6>
+            </th:block>
+        </div>
+
+    </th:block>
+    <div id="diff" style="display: inline">
+        <h6 class="name"></h6>
+        <th:block th:each="value : ${values}">
+            <h6 th:class="${value}"></h6>
+        </th:block>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+var index = 0;
+
+var intervalId = setInterval(function() {
+  $.ajax({
+        type: "GET",
+        url: "/local/status",
+        data: jQuery.param({index: index}),
+
+        success: function(response){
+            if(!response.working){
+                $('#title').html(
+                    "Game not found"
+                );
+            }
+            else{
+                $('#title').html(
+                    "Game is on"
+                );
+                if(index != 10){
+                var element = $('#' + ('Champion' + (index +1)));
+                    element.find('.name').html(response.summonerName);
+                    element.find('.abilityPower').html("Ability Power: " + response.abilityPower);
+                    element.find('.armor').html("Armor: " + response.armor);
+                    element.find('.attackDamage').html("Attack damage: " + response.attackDamage);
+                    element.find('.attackSpeed').html("Attack Speed: " + response.attackSpeed);
+                    element.find('.healthMax').html("Max health: " + response.healthMax);
+                    element.find('.lifesteal').html("Lifesteal: " + response.lifesteal);
+                    element.find('.magicResist').html("Magic resist: " + response.magicResist);
+                    element.find('.movementSpeed').html("Movement Speed: " + response.movementSpeed);
+                    element.find('.powerMax').html("Power max: " + response.powerMax);
+                }
+                else{
+                 var element = $('#diff');
+                     element.find('.name').html(response.summonerName);
+                    element.find('.abilityPower').html("Ability Power: " + response.abilityPower);
+                    element.find('.armor').html("Armor: " + response.armor);
+                    element.find('.attackDamage').html("Attack damage: " + response.attackDamage);
+                    element.find('.attackSpeed').html("Attack Speed: " + response.attackSpeed);
+                    element.find('.healthMax').html("Max health: " + response.healthMax);
+                    element.find('.lifesteal').html("Lifesteal: " + response.lifesteal);
+                    element.find('.magicResist').html("Magic resist: " + response.magicResist);
+                    element.find('.movementSpeed').html("Movement Speed: " + response.movementSpeed);
+                    element.find('.powerMax').html("Power max: " + response.powerMax);
+                }
+            }
+
+
+         }
+    });
+
+    index++;
+    if(index > 10){
+        index=0;
+    }
+}, 250);
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

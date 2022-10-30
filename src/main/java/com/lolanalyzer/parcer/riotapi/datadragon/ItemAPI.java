@@ -1,8 +1,11 @@
 package com.lolanalyzer.parcer.riotapi.datadragon;
 
-import com.lolanalyzer.parcer.entity.datadragon.Item;
+import com.lolanalyzer.parcer.entity.datadragon.ItemStats;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ItemAPI {
 
@@ -77,8 +80,24 @@ public class ItemAPI {
         };
     }
 
-    public static Item parseItem(JSONObject itemJSON, long id){
-        Item item = new Item();
+    public static Map<String, String> championToItemConversion(){
+        Map<String, String> conversion = new HashMap<>();
+
+        conversion.put("FlatMagicDamageMod","abilityPower");
+        conversion.put("FlatArmorMod","armor");
+        conversion.put("FlatPhysicalDamageMod","attackDamage");
+        conversion.put("PercentAttackSpeedMod","attackSpeed");
+        conversion.put("FlatHPPoolMod","healthMax");
+        conversion.put("PercentLifeStealMod","lifesteal");
+        conversion.put("FlatSpellBlockMod","magicResist");
+        conversion.put("FlatMovementSpeedMod","movementSpeed");
+        conversion.put("FlatMPPoolMod","powerMax");
+
+        return conversion;
+    }
+
+    public static ItemStats parseItem(JSONObject itemJSON, long id){
+        ItemStats item = new ItemStats();
 
         item.setId(id);
         item.setName(itemJSON.getString("name"));
@@ -88,9 +107,9 @@ public class ItemAPI {
         JSONObject statsJSON = itemJSON.getJSONObject("stats");
 
         for(String key : getStatKeys()){
-            long val = 0;
+            double val = 0;
             try{
-                val = statsJSON.getLong(key);
+                val = statsJSON.getDouble(key);
             }catch (JSONException ignored){}
             item.getStats().put(key, val);
         }

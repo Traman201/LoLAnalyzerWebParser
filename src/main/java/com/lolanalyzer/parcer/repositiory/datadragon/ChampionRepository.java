@@ -1,8 +1,8 @@
 package com.lolanalyzer.parcer.repositiory.datadragon;
 
-import com.lolanalyzer.parcer.entity.datadragon.Champion;
+import com.lolanalyzer.parcer.entity.datadragon.ChampionStats;
 import org.springframework.data.repository.CrudRepository;
 
-public interface ChampionRepository extends CrudRepository<Champion, String> {
+public interface ChampionRepository extends CrudRepository<ChampionStats, String> {
 
 }
