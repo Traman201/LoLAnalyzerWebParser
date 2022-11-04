@@ -19,6 +19,13 @@ import java.io.IOException;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 
+/**
+ * Паук для сбора датасетов
+ *
+ * <p>
+ *     Используется для сбора датасетов и записи их в базу данных. Работает в фоновом режиме.
+ * </p>
+ */
 @Getter
 @Setter
 @Slf4j
@@ -41,6 +48,12 @@ public class Crawler {
     private boolean isCrawling = false;
     private boolean isRequestStop = false;
 
+    /**
+     * Получение последних сыгранных матчей посредством запроса через Riot API
+     * @param puuid ID запрашиваемого игрока, зависит от API-ключа
+     * @return Массив с последними сыгранными матчами игрока
+     * @see Match
+     */
     public ArrayList<Match> getLastMatches(String puuid){
         status = "Retrieving recent matches from " + puuid;
         JSONArray o = null;
@@ -74,6 +87,15 @@ public class Crawler {
         }
         return matches;
     }
+
+    /**
+     * Постановка на паузу работы паука
+     * <p>
+     *     Чаще всего вызывается в связи с ограничением на отправку запросов со стороны Riot Games
+     * </p>
+     * @param millis Суммарное время паузы
+     * @param reason Описание причины для постановки на паузу
+     */
     private void waitForReason(long millis, String reason){
         for(long i = 0; i < millis; i += 1000){
             status = reason + " Waiting. Time remaining: " + (millis - i) / 1000.0;
@@ -84,12 +106,34 @@ public class Crawler {
             }
         }
     }
+
+    /**
+     * Внештатное завершение работы паука
+     *
+     * @param message Сообщение, описывающее внештатное завершение работы паука. Содежит текст ошибки
+     */
     private void fail(String message){
         log.error("Error. " + message);
         status = "Error. Stopping now. Error message: " + message;
         setRequestStop(true);
     }
 
+    /**
+     * Работа паука
+     *
+     * <p>
+     *     Основной метод работы паука. Принцип работы основывается на обработке матчей
+     *     игроков, находящихся в одном матче с текущим игроком.
+     *
+     * </p>
+     * <p>
+     *     Может завершаться с ошибкой, если начинать работу паука с одного и то же игрока подряд
+     *     или с игроков, матчи которых уже были обработаны
+     * </p>
+     *
+     * @param startName ID игрока, с которого начинается работа паука. Зависит от API-ключа
+     * @param goal Конечное число обработанных матчей
+     */
     @Async
     public void crawling(String startName, long goal) {
         if(isCrawling){
