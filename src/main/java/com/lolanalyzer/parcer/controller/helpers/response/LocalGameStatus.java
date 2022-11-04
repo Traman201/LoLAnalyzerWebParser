@@ -3,6 +3,10 @@ package com.lolanalyzer.parcer.controller.helpers.response;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Параметры текущей локальной игры
+ */
+
 @Setter
 @Getter
 public class LocalGameStatus {

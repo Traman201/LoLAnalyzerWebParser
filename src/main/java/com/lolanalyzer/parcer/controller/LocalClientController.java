@@ -15,6 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Контроллер эмуляции локального клиента
+ * */
 @Controller
 @Slf4j
 @RequestMapping("/local")
@@ -27,6 +30,9 @@ public class LocalClientController {
     LocalRequester requester;
 
 
+    /**
+     * Вызов макета local.html
+     * */
     @GetMapping
     public String localForm(Model model){
         String [] champions = new String[10];
@@ -39,6 +45,15 @@ public class LocalClientController {
         return "local";
     }
 
+    /**
+     * Вывод информации о текущей игре в формате JSON
+     *
+     * <p>
+     *     Ожидает, что количество игроков в текущей игре <b>равно 10</b>. В противном случае возвращает пустой ответ.
+     * </p>
+     *
+     * @param index Порядковый номер чемпиона
+     * */
     @GetMapping("/status")
     public @ResponseBody LocalGameStatus getStatus(@RequestParam int index){
         LocalGameStatus localGameStatus = new LocalGameStatus();
