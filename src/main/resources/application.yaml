@@ -10,21 +10,24 @@ spring:
     config:
         activate:
             on-profile: psdev
+    jpa:
+        database-platform: ${DATABASE_PLATFORM}
+        hibernate:
+            ddl-auto: update
+
     datasource:
-        username: sa
-        password: password
-        driverClassName: org.h2.Driver
+        username: ${DATABASE_USER_NAME}
+        password: ${DATABASE_USER_PASSWORD}
+        url: ${DATABASE_PATH}
+        driverClassName: ${DATABASE_DRIVER_CLASS_NAME}
         generate-unique-name: false
-        name: Games
-        jpa:
-            spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+        name: ${DATABASE_NAME}
 
-    h2:
-        console:
-            enabled: true
-            settings:
-                web-allow-others: true
-
+        h2:
+            console:
+                enabled: true
+                settings:
+                    web-allow-others: true
 logging:
     file:
         name: log/log.log

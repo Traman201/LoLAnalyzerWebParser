@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @Entity
+@Table(name = "matchinfo")
 @Setter
 @Getter
 @Slf4j

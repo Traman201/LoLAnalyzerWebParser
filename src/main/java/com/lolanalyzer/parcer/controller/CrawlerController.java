@@ -1,19 +1,15 @@
 package com.lolanalyzer.parcer.controller;
 
 
+import com.lolanalyzer.parcer.controller.helpers.response.CrawlerWorkStatus;
 import com.lolanalyzer.parcer.datagather.crawler.Crawler;
 import com.lolanalyzer.parcer.riotapi.RiotAPIConfiguration;
 import com.lolanalyzer.parcer.service.MatchRepositoryManager;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 
@@ -37,6 +33,8 @@ public class CrawlerController {
     public String test(Model model){
         model.addAttribute("count", manager.getGameRepository().count());
         model.addAttribute("crawler", crawler);
+
+        model.addAttribute("apikey", RiotAPIConfiguration.getInstance().getApiKey());
         return "crawler";
     }
 
@@ -50,10 +48,32 @@ public class CrawlerController {
     }
 
     @GetMapping(params = "requestStop")
-    public void stopCrawler(@RequestParam String requestStop){
+    public String stopCrawler(@RequestParam String requestStop){
         if(Objects.equals(requestStop, "yes")){
             crawler.setRequestStop(true);
         }
+        return "crawler";
+    }
+
+    @GetMapping("/status")
+    public @ResponseBody CrawlerWorkStatus getStatus(){
+        CrawlerWorkStatus dataSaverStatus = new CrawlerWorkStatus();
+
+        dataSaverStatus.inQueue = crawler.getSaver().getQueueSize();
+        dataSaverStatus.maxQueue = crawler.getSaver().getMaxQueueSize();
+        dataSaverStatus.isBusySaving = crawler.getSaver().isBusySaving();
+
+        dataSaverStatus.isCrawlerWorking = crawler.isCrawling();
+        dataSaverStatus.remainingCount = crawler.getRemainingCount();
+        dataSaverStatus.datasetsCounter = crawler.getDatasetsCounter();
+
+        dataSaverStatus.crawlerStatus = crawler.getStatus();
+
+        dataSaverStatus.playerPool = crawler.getPlayerPool();
+        dataSaverStatus.failedMatches = crawler.getFailedMatches();
+
+
+        return dataSaverStatus;
     }
 
 
