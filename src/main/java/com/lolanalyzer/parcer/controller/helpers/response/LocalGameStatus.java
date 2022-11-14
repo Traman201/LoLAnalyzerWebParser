@@ -19,7 +19,9 @@ public class LocalGameStatus {
     double magicResist;
     double movementSpeed;
     double powerMax;
+    double kills;
     String summonerName;
+    String winChance;
 
     boolean isWorking;
 }

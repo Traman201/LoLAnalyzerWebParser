@@ -4,15 +4,12 @@ import com.lolanalyzer.parcer.entity.datadragon.ChampionStats;
 import com.lolanalyzer.parcer.entity.datadragon.ItemStats;
 import com.lolanalyzer.parcer.repositiory.datadragon.ChampionRepository;
 import com.lolanalyzer.parcer.repositiory.datadragon.ItemRepository;
-import com.lolanalyzer.parcer.riotapi.RiotAPIConfiguration;
-import com.lolanalyzer.parcer.riotapi.RiotAPIHelper;
 import com.lolanalyzer.parcer.service.TeamDiffCalculator;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -31,6 +28,7 @@ import java.util.Optional;
 @Slf4j
 public class LocalRequester {
     boolean gameStarted = false;
+    String winChance;
 
     @Autowired
     ChampionRepository championRepository;
@@ -70,6 +68,7 @@ public class LocalRequester {
             Champion champion = teamDiffCalculator.findChampion(summonerName);
 
             champion.setLevel(playerJSON.getInt("level"));
+            champion.getScore().put("kills", playerJSON.getJSONObject("scores").getDouble("kills"));
 
             JSONArray itemsArray = playerJSON.getJSONArray("items");
             champion.setItems(parseItems(itemsArray));
