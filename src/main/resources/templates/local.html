@@ -9,18 +9,112 @@
 </head>
 <body class="bg-body">
 
-<div class="container-fluid header">
-    <div class="container d-flex p-0 header-title">
+<div class="container-fluid p-0 header">
+    <div class="container-fluid d-flex px-5 py-3 header-title">
         <div class="col-3 header-title-logo">
-            <img src="file:///C:/Users/Barsatar/IdeaProjects/LoLAnalyzerWebParser/src/main/resources/static/images/logo/logo_with_text.png" class="img-fluid" alt="LoLAnalyzer">
+            <img th:src="@{/images/logo/logo_with_text.png}" class="img-fluid" alt="LoLAnalyzer">
         </div>
 
-        <div class="col-6 header-title-text">2</div>
+        <div class="col-6 text-center header-title-text align-items-center justify-content-center">Live-анализ матча</div>
 
-        <div class="col-3 header-title-percent">3</div>
+        <div class="col-3 text-center header-title-percent align-items-center justify-content-center">Вероятность победы в матче:</div>
     </div>
 
-    <div class="container header-table-title"><div>
+    <div class="container-fluid d-flex p-0 header-table-title">
+        <div class="col-1 py-3 align-items-center justify-content-center border-r">Параметр</div>
+
+        <div class="col-5 d-flex border-r align-items-center" style="background-color: #9c2020">
+            <div class="col-2 py-3">
+                <div class="align-items-center justify-content-center player-name">Barsatar</div>
+                <div><img th:src="@{/images/champions/Akali.webp}" class="img-fluid" alt="Игрок 1"></div>
+                <div class="align-items-center justify-content-center champion-name">Akali</div>
+            </div>
+            <div class="col-2 py-3">
+                <div class="align-items-center justify-content-center player-name">Barsatar</div>
+                <div><img th:src="@{/images/champions/Ahri.webp}" class="img-fluid" alt="Игрок 1"></div>
+                <div class="align-items-center justify-content-center champion-name">Ahri</div>
+            </div>
+            <div class="col-2 py-3">
+                <div class="align-items-center justify-content-center player-name">Barsatar</div>
+                <div><img th:src="@{/images/champions/Akali.webp}" class="img-fluid" alt="Игрок 1"></div>
+                <div class="align-items-center justify-content-center champion-name">Akali</div>
+            </div>
+            <div class="col-2 py-3">
+                <div class="align-items-center justify-content-center player-name">Barsatar</div>
+                <div><img th:src="@{/images/champions/Ahri.webp}" class="img-fluid" alt="Игрок 1"></div>
+                <div class="align-items-center justify-content-center champion-name">Ahri</div>
+            </div>
+            <div class="col-2 py-3">
+                <div class="align-items-center justify-content-center player-name">Barsatar</div>
+                <div><img th:src="@{/images/champions/Akali.webp}" class="img-fluid" alt="Игрок 1"></div>
+                <div class="align-items-center justify-content-center champion-name">Akali</div>
+            </div>
+            <div class="col-2 py-3">
+                <img th:src="@{/images/nexus/redNexus.webp}" class="img-fluid" alt="Красная команда">
+            </div>
+        </div>
+
+        <div class="col-1 py-3 text-center align-items-center justify-content-center border-r">
+            <img th:src="@{/images/all/vs.png}" class="img-fluid" alt="VS">
+        </div>
+
+        <div class="col-5 d-flex align-items-center" style="background-color: #4228af">
+            <div class="col-2 py-3">
+                <img th:src="@{/images/nexus/blueNexus.webp}" class="img-fluid" alt="Синяя команда">
+            </div>
+            <div class="col-2 py-3">
+                <div class="align-items-center justify-content-center player-name">Barsatar</div>
+                <div><img th:src="@{/images/champions/Akali.webp}" class="img-fluid" alt="Игрок 1"></div>
+                <div class="align-items-center justify-content-center champion-name">Akali</div>
+            </div>
+            <div class="col-2 py-3">
+                <div class="align-items-center justify-content-center player-name">Barsatar</div>
+                <div><img th:src="@{/images/champions/Ahri.webp}" class="img-fluid" alt="Игрок 1"></div>
+                <div class="align-items-center justify-content-center champion-name">Ahri</div>
+            </div>
+            <div class="col-2 py-3">
+                <div class="align-items-center justify-content-center player-name">Barsatar</div>
+                <div><img th:src="@{/images/champions/Akali.webp}" class="img-fluid" alt="Игрок 1"></div>
+                <div class="align-items-center justify-content-center champion-name">Akali</div>
+            </div>
+            <div class="col-2 py-3">
+                <div class="align-items-center justify-content-center player-name">Barsatar</div>
+                <div><img th:src="@{/images/champions/Ahri.webp}" class="img-fluid" alt="Игрок 1"></div>
+                <div class="align-items-center justify-content-center champion-name">Ahri</div>
+            </div>
+            <div class="col-2 py-3">
+                <div class="align-items-center justify-content-center player-name">Barsatar</div>
+                <div><img th:src="@{/images/champions/Akali.webp}" class="img-fluid" alt="Игрок 1"></div>
+                <div class="align-items-center justify-content-center champion-name">Akali</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid p-0 border-b">
+    <div class="container-fluid d-flex p-0">
+        <div class="col-1 py-3 align-items-center justify-content-center">Параметр</div>
+
+        <div class="col-5 d-flex align-items-center">
+            <div class="col-2 py-3">Значение</div>
+            <div class="col-2 py-3">Значение</div>
+            <div class="col-2 py-3">Значение</div>
+            <div class="col-2 py-3">Значение</div>
+            <div class="col-2 py-3">Значение</div>
+            <div class="col-2 py-3">Значение</div>
+        </div>
+
+        <div class="col-1 py-3 text-center align-items-center justify-content-center">Значение</div>
+
+        <div class="col-5 d-flex align-items-center">
+            <div class="col-2 py-3">Значение</div>
+            <div class="col-2 py-3">Значение</div>
+            <div class="col-2 py-3">Значение</div>
+            <div class="col-2 py-3">Значение</div>
+            <div class="col-2 py-3">Значение</div>
+            <div class="col-2 py-3">Значение</div>
+        </div>
+    </div>
 </div>
 
 
@@ -110,6 +204,7 @@ var intervalId = setInterval(function() {
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
+</html>
 
 <style>
     .bg-body {
@@ -117,27 +212,41 @@ var intervalId = setInterval(function() {
     }
 
     .header {
-        background-color: #7060d5;
-        height: 300px;
-    }
-
-    .header-title {
-        background-color: #e3319e;
-    }
-
-    .header-title-logo {
-        background-color: #31e331;
-        height: auto;
+        background-color: #9f99c7;
     }
 
     .header-title-text {
-        background-color: #e3a631;
-        height: auto;
+        font-size: 50px
     }
 
-    .header-title-percent {
-        background-color: #31e3bf;
-        height: auto;
+    .header-table-title {
+        border-top: 4px solid #570267;
+        border-bottom: 4px solid #570267;
+    }
+
+    .border-r {
+        border-right: 4px solid #570267;
+    }
+
+    .border-b {
+        border-bottom: 4px solid #570267;
+    }
+
+    .align-items-center {
+        display: flex;
+        align-items: center;
+    }
+
+    .player-name {
+        color: #cab1d7;
+        padding-bottom: 5px;
+        font-size: 18px;
+    }
+
+    .champion-name {
+        color: #cab1d7;
+        padding-top: 5px;
+        font-weight: bold;
+        font-size: 18px;
     }
 </style>
-</html>
