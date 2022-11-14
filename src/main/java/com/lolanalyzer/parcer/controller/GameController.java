@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Контроллер таблицы с записями игр из базы данных
+ * */
 @Controller
 @Slf4j
 @RequestMapping("/game")
@@ -32,6 +35,9 @@ public class GameController {
     DataDump dataDump;
 
 
+    /**
+     * Вызов макета game.html
+     * */
     @GetMapping
     public String gameForm(Model model){
         ArrayList<Match> games = (ArrayList<Match>) matchManager.getGameRepository().findAll();
@@ -46,6 +52,12 @@ public class GameController {
 
         return "game";
     }
+
+    /**
+     * Вызов макета подробной информации о матче
+     *
+     * @param matchId ID запрашиваемого матча. Берется из адресной строки
+     * */
     @GetMapping("/{matchId}")
     public String matchInfoForm(Model model, @PathVariable String matchId){
 
@@ -57,6 +69,12 @@ public class GameController {
         return "matchInfo";
     }
 
+    /**
+     * Ручное добавление матча
+     *
+     * @param matchID ID запрашиваемого матча
+     * @param apiKey API-ключ аккаунта разработчика Riot Games
+     * */
     @PostMapping()
     public String addGame(@RequestParam String matchID, @RequestParam String apiKey) {
         RiotAPIConfiguration.getInstance().setApiKey(apiKey);
@@ -84,6 +102,11 @@ public class GameController {
         return "redirect:/game";
     }
 
+    /**
+     * Запрос на выгрузку датасета
+     *
+     * @param dumpType Ключ спецификации датасета. Чаще всего соответствует номеру задачи, в рамках которой она была составлена
+     * */
     @GetMapping("/dump")
     public String dumpGame(@RequestParam String dumpType){
         if(dataDump.dump(dumpType)){

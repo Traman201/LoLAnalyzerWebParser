@@ -3,6 +3,10 @@ package com.lolanalyzer.parcer.controller.helpers.response;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * Параметры текущей локальной игры
+ */
+
 @Setter
 @Getter
 public class LocalGameStatus {
@@ -15,7 +19,9 @@ public class LocalGameStatus {
     double magicResist;
     double movementSpeed;
     double powerMax;
+    double kills;
     String summonerName;
+    String winChance;
 
     boolean isWorking;
 }

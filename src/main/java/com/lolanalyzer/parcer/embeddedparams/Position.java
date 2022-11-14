@@ -7,6 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
+/**
+ * Отображение положения на внутриигровой карте
+ */
 @Setter
 @Getter
 @Slf4j

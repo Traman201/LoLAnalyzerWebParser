@@ -1,8 +1,7 @@
 package com.lolanalyzer.parcer.controller;
 
 import com.lolanalyzer.parcer.controller.helpers.response.LocalGameStatus;
-import com.lolanalyzer.parcer.riotapi.ParticipantFramesAPI;
-import com.lolanalyzer.parcer.riotapi.datadragon.ChampionAPI;
+import com.lolanalyzer.parcer.controller.helpers.response.NeuralResponse;
 import com.lolanalyzer.parcer.riotapi.datadragon.ItemAPI;
 import com.lolanalyzer.parcer.service.TeamDiffCalculator;
 import com.lolanalyzer.parcer.service.game.Champion;
@@ -10,11 +9,13 @@ import com.lolanalyzer.parcer.service.game.LocalRequester;
 import com.lolanalyzer.parcer.service.game.Team;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Контроллер эмуляции локального клиента
+ * */
 @Controller
 @Slf4j
 @RequestMapping("/local")
@@ -27,6 +28,9 @@ public class LocalClientController {
     LocalRequester requester;
 
 
+    /**
+     * Вызов макета local.html
+     * */
     @GetMapping
     public String localForm(Model model){
         String [] champions = new String[10];
@@ -39,8 +43,17 @@ public class LocalClientController {
         return "local";
     }
 
+    /**
+     * Вывод информации о текущей игре в формате JSON
+     *
+     * <p>
+     *     Ожидает, что количество игроков в текущей игре <b>равно 10</b>. В противном случае возвращает пустой ответ.
+     * </p>
+     *
+     * @param index Порядковый номер чемпиона
+     * */
     @GetMapping("/status")
-    public @ResponseBody LocalGameStatus getStatus(@RequestParam int index){
+    public @ResponseBody LocalGameStatus getStatus(@RequestParam(required = false, defaultValue = "10") int index){
         LocalGameStatus localGameStatus = new LocalGameStatus();
         Team team = null;
 
@@ -67,6 +80,8 @@ public class LocalClientController {
             localGameStatus.setMagicResist(diff.get("magicResist"));
             localGameStatus.setMovementSpeed(diff.get("movementSpeed"));
             localGameStatus.setPowerMax(diff.get("powerMax"));
+            localGameStatus.setKills(diff.get("kills"));
+            localGameStatus.setWinChance(requester.getWinChance());
 
         }
         else{
@@ -86,10 +101,18 @@ public class LocalClientController {
             localGameStatus.setMagicResist(champion.getStats().get("magicResist"));
             localGameStatus.setMovementSpeed(champion.getStats().get("movementSpeed"));
             localGameStatus.setPowerMax(champion.getStats().get("powerMax"));
+            localGameStatus.setKills(champion.getScore().get("kills"));
 
         }
 
 
         return localGameStatus;
+    }
+
+    @PostMapping("/status")
+    public @ResponseBody NeuralResponse postWinChance(@RequestParam(required = false, defaultValue = "0") String winChance){
+        NeuralResponse n = new NeuralResponse();
+        n.setKeepWorking(requester.isGameStarted());
+        return n;
     }
 }

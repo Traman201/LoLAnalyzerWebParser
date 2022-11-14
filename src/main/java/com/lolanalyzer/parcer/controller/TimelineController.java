@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.sql.Time;
 import java.util.Optional;
 
+/**
+ * Контроллер таймлайна матча
+ * */
 @Controller
 @Slf4j
 @RequestMapping("/timeline")
@@ -27,6 +30,10 @@ public class TimelineController {
     }
 
 
+    /**
+     * Вызов формы timeline.html
+     * @param matchId ID запрашиваемого матча. Берется из адресной строки
+     */
     @GetMapping("/{matchId}")
     public String timelineForm(@PathVariable String matchId, Model model){
 

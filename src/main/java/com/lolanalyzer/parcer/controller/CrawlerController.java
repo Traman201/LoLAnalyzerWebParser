@@ -13,14 +13,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 
+/**
+* Котроллер страницы сбора датасета посредством паука
+* */
 @Controller
 @Slf4j
 @RequestMapping("/crawler")
 public class CrawlerController {
 
     Crawler crawler;
-
-
     MatchRepositoryManager manager;
 
     @Autowired
@@ -29,8 +30,11 @@ public class CrawlerController {
         this.manager = manager;
     }
 
+    /**
+    * Вызов макета crawler.html
+    * */
     @GetMapping
-    public String test(Model model){
+    public String getMapping(Model model){
         model.addAttribute("count", manager.getGameRepository().count());
         model.addAttribute("crawler", crawler);
 
@@ -38,6 +42,13 @@ public class CrawlerController {
         return "crawler";
     }
 
+    /**
+    * Старт сбора датасетов.
+    *
+    * @param numMatches количество матчей, которые необходимо добавить в базу данных
+    * @param puuid ID начального игрока. Зависит от API-ключа
+    * @param apiKey API-ключ аккаунта разработчика
+    * */
     @PostMapping
     public String startCrawler(@RequestParam long numMatches,
                              @RequestParam String puuid,
@@ -47,14 +58,20 @@ public class CrawlerController {
         return "redirect:/crawler";
     }
 
+    /**
+    * Запрос остановки работы паука
+    * */
     @GetMapping(params = "requestStop")
-    public String stopCrawler(@RequestParam String requestStop){
+    public String stopCrawler(@RequestParam String requestStop, Model model){
         if(Objects.equals(requestStop, "yes")){
             crawler.setRequestStop(true);
         }
-        return "crawler";
+        return getMapping(model);
     }
 
+    /**
+    * Возвращает параметры работы паука в JSON-формате
+    * */
     @GetMapping("/status")
     public @ResponseBody CrawlerWorkStatus getStatus(){
         CrawlerWorkStatus dataSaverStatus = new CrawlerWorkStatus();
