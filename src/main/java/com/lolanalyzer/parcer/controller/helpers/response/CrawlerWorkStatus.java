@@ -1,6 +1,8 @@
 package com.lolanalyzer.parcer.controller.helpers.response;
 
-
+/**
+ * Параметры работы паука
+ */
 public class CrawlerWorkStatus {
     public boolean isCrawlerWorking;
 
