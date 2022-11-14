@@ -83,6 +83,7 @@ public class LocalClientController {
             localGameStatus.setKill(diff.get("kills"));
             localGameStatus.setWinChance(requester.getWinChance());
 
+
         }
         else{
             index -= 5;
@@ -103,6 +104,7 @@ public class LocalClientController {
             localGameStatus.setMovementSpeed(champion.getStats().get("movementSpeed"));
             localGameStatus.setPowerMax(champion.getStats().get("powerMax"));
             localGameStatus.setKill(champion.getScore().get("kills"));
+            localGameStatus.setRawChampionName(champion.getRawChampionName());
 
         }
 

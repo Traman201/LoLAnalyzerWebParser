@@ -24,6 +24,7 @@ public class LocalGameStatus {
     String summonerName;
     String championName;
     String winChance;
+    String rawChampionName;
 
     boolean isWorking;
 }
