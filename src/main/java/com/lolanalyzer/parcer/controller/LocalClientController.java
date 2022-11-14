@@ -1,8 +1,6 @@
 package com.lolanalyzer.parcer.controller;
 
 import com.lolanalyzer.parcer.controller.helpers.response.LocalGameStatus;
-import com.lolanalyzer.parcer.riotapi.ParticipantFramesAPI;
-import com.lolanalyzer.parcer.riotapi.datadragon.ChampionAPI;
 import com.lolanalyzer.parcer.riotapi.datadragon.ItemAPI;
 import com.lolanalyzer.parcer.service.TeamDiffCalculator;
 import com.lolanalyzer.parcer.service.game.Champion;
@@ -10,7 +8,6 @@ import com.lolanalyzer.parcer.service.game.LocalRequester;
 import com.lolanalyzer.parcer.service.game.Team;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +31,7 @@ public class LocalClientController {
             champions[i] = "Champion" + (i +1);
         }
         String[] values = ItemAPI.championToItemConversion().values().toArray(new String[0]);
-        model.addAttribute("champions", champions);
+        model.addAttribute("static/images/champions", champions);
         model.addAttribute("values", values);
         return "local";
     }
