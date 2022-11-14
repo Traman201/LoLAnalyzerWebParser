@@ -80,7 +80,7 @@ public class LocalClientController {
             localGameStatus.setMagicResist(diff.get("magicResist"));
             localGameStatus.setMovementSpeed(diff.get("movementSpeed"));
             localGameStatus.setPowerMax(diff.get("powerMax"));
-            localGameStatus.setKills(diff.get("kills"));
+            localGameStatus.setKill(diff.get("kills"));
             localGameStatus.setWinChance(requester.getWinChance());
 
         }
@@ -92,6 +92,7 @@ public class LocalClientController {
         if(team != null){
             Champion champion = team.getChampions().get(index);
             localGameStatus.setSummonerName("(" + champion.getSummonerName() + ") " + champion.getChampionName());
+            localGameStatus.setChampionName(champion.getChampionName());
             localGameStatus.setAbilityPower(champion.getStats().get("abilityPower"));
             localGameStatus.setArmor(champion.getStats().get("armor"));
             localGameStatus.setAttackDamage(champion.getStats().get("attackDamage"));
@@ -101,7 +102,7 @@ public class LocalClientController {
             localGameStatus.setMagicResist(champion.getStats().get("magicResist"));
             localGameStatus.setMovementSpeed(champion.getStats().get("movementSpeed"));
             localGameStatus.setPowerMax(champion.getStats().get("powerMax"));
-            localGameStatus.setKills(champion.getScore().get("kills"));
+            localGameStatus.setKill(champion.getScore().get("kills"));
 
         }
 
@@ -112,6 +113,7 @@ public class LocalClientController {
     @PostMapping("/status")
     public @ResponseBody NeuralResponse postWinChance(@RequestParam(required = false, defaultValue = "0") String winChance){
         NeuralResponse n = new NeuralResponse();
+        requester.setWinChance(winChance);
         n.setKeepWorking(requester.isGameStarted());
         return n;
     }

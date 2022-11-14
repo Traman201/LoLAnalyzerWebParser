@@ -10,6 +10,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class LocalGameStatus {
+    double kill;
     double abilityPower;
     double armor;
     double attackDamage;
@@ -19,8 +20,9 @@ public class LocalGameStatus {
     double magicResist;
     double movementSpeed;
     double powerMax;
-    double kills;
+
     String summonerName;
+    String championName;
     String winChance;
 
     boolean isWorking;

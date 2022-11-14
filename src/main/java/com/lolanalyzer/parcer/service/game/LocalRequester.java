@@ -6,6 +6,7 @@ import com.lolanalyzer.parcer.repositiory.datadragon.ChampionRepository;
 import com.lolanalyzer.parcer.repositiory.datadragon.ItemRepository;
 import com.lolanalyzer.parcer.service.TeamDiffCalculator;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,6 +26,7 @@ import java.util.Optional;
 @Service
 @EnableScheduling
 @Getter
+@Setter
 @Slf4j
 public class LocalRequester {
     boolean gameStarted = false;
