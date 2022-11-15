@@ -308,6 +308,7 @@ var intervalId = setInterval(function() {
                     $('#id_health_max_diff').html(Math.round(parseFloat(response.healthMax) * 1000) / 1000);
                     $('#id_power_max_diff').html(Math.round(parseFloat(response.powerMax) * 1000) / 1000);
                     $('#id_kill_diff').html(Math.round(parseFloat(response.kill) * 1000) / 1000);
+                    $('#id_win_chance').html(response.winChance);
                 }
 
                 if (index == 1) {
@@ -479,7 +480,7 @@ var intervalId = setInterval(function() {
     }
 }, 250);
 
-$('#id_win_chance').html(response.winChance);
+
 
 function setChampIcon(champName, index){
       $('#id_avatar_' + index).attr('src',"/images/champions/" + champName + ".webp");
