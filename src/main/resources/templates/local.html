@@ -19,7 +19,10 @@
             <img th:src="@{/images/all/title.png}" class="img-fluid" alt="Live-анализ матча">
         </div>
 
-        <div class="col-3 text-center header-title-percent align-items-center justify-content-center">Вероятность победы в матче:</div>
+        <div class="col-3 text-center header-title-percent align-items-center justify-content-center">
+            <div class="mr-2">Прогноз: </div>
+            <div id="id_win_chance"></div>
+        </div>
     </div>
 
     <div class="container-fluid d-flex p-0 header-table-title">
@@ -27,27 +30,27 @@
 
         <div class="col-1 py-1 bg-blue">
             <div class="align-items-center justify-content-center player-name" id="id_summoner_name_1"></div>
-            <div id="id_div_avatar_1"><img src="" class="img-fluid" id="id_avatar_1" alt="Игрок 1"></div>
+            <div id="id_div_avatar_1"><img src="" class="img-fluid" title="" id="id_avatar_1" alt="Игрок 1"></div>
             <div class="align-items-center justify-content-center champion-name" id="id_champion_name_1"></div>
         </div>
         <div class="col-1 py-1 bg-blue">
             <div class="align-items-center justify-content-center player-name" id="id_summoner_name_2"></div>
-            <div id="id_div_avatar_2"><img src="" class="img-fluid" id="id_avatar_2" alt="Игрок 2"></div>
+            <div id="id_div_avatar_2"><img src="" class="img-fluid" title="" id="id_avatar_2" alt="Игрок 2"></div>
             <div class="align-items-center justify-content-center champion-name" id="id_champion_name_2"></div>
         </div>
         <div class="col-1 py-1 bg-blue">
             <div class="align-items-center justify-content-center player-name" id="id_summoner_name_3"></div>
-            <div id="id_div_avatar_3"><img src="" class="img-fluid" id="id_avatar_3" alt="Игрок 3"></div>
+            <div id="id_div_avatar_3"><img src="" class="img-fluid" title="" id="id_avatar_3" alt="Игрок 3"></div>
             <div class="align-items-center justify-content-center champion-name" id="id_champion_name_3"></div>
         </div>
         <div class="col-1 py-1 bg-blue">
             <div class="align-items-center justify-content-center player-name" id="id_summoner_name_4"></div>
-            <div id="id_div_avatar_4"><img src="" class="img-fluid" id="id_avatar_4" alt="Игрок 4"></div>
+            <div id="id_div_avatar_4"><img src="" class="img-fluid" title="" id="id_avatar_4" alt="Игрок 4"></div>
             <div class="align-items-center justify-content-center champion-name" id="id_champion_name_4"></div>
         </div>
         <div class="col-1 py-1 bg-blue">
             <div class="align-items-center justify-content-center player-name" id="id_summoner_name_5"></div>
-            <div id="id_div_avatar_5"><img src="" class="img-fluid" id="id_avatar_5" alt="Игрок 5"></div>
+            <div id="id_div_avatar_5"><img src="" class="img-fluid" title="" id="id_avatar_5" alt="Игрок 5"></div>
             <div class="align-items-center justify-content-center champion-name" id="id_champion_name_5"></div>
         </div>
 
@@ -57,27 +60,27 @@
 
         <div class="col-1 py-1 bg-red">
             <div class="align-items-center justify-content-center player-name" id="id_summoner_name_6"></div>
-            <div id="id_div_avatar_6"><img src="" class="img-fluid" id="id_avatar_6" alt="Игрок 6"></div>
+            <div id="id_div_avatar_6"><img src="" class="img-fluid" title="" id="id_avatar_6" alt="Игрок 6"></div>
             <div class="align-items-center justify-content-center champion-name" id="id_champion_name_6"></div>
         </div>
         <div class="col-1 py-1 bg-red">
             <div class="align-items-center justify-content-center player-name" id="id_summoner_name_7"></div>
-            <div id="id_div_avatar_7"><img src="" class="img-fluid" id="id_avatar_7" alt="Игрок 7"></div>
+            <div id="id_div_avatar_7"><img src="" class="img-fluid" title="" id="id_avatar_7" alt="Игрок 7"></div>
             <div class="align-items-center justify-content-center champion-name" id="id_champion_name_7"></div>
         </div>
         <div class="col-1 py-1 bg-red">
             <div class="align-items-center justify-content-center player-name" id="id_summoner_name_8"></div>
-            <div id="id_div_avatar_8"><img src="" class="img-fluid" id="id_avatar_8" alt="Игрок 8"></div>
+            <div id="id_div_avatar_8"><img src="" class="img-fluid" title="" id="id_avatar_8" alt="Игрок 8"></div>
             <div class="align-items-center justify-content-center champion-name" id="id_champion_name_8"></div>
         </div>
         <div class="col-1 py-1 bg-red">
             <div class="align-items-center justify-content-center player-name" id="id_summoner_name_9"></div>
-            <div id="id_div_avatar_9"><img src="" class="img-fluid" id="id_avatar_9" alt="Игрок 9"></div>
+            <div id="id_div_avatar_9"><img src="" class="img-fluid" title="" id="id_avatar_9" alt="Игрок 9"></div>
             <div class="align-items-center justify-content-center champion-name" id="id_champion_name_9"></div>
         </div>
         <div class="col-1 py-1 bg-red">
             <div class="align-items-center justify-content-center player-name" id="id_summoner_name_10"></div>
-            <div id="id_div_avatar_10"><img src="" class="img-fluid" id="id_avatar_10" alt="Игрок 10"></div>
+            <div id="id_div_avatar_10"><img src="" class="img-fluid" title="" id="id_avatar_10" alt="Игрок 10"></div>
             <div class="align-items-center justify-content-center champion-name" id="id_champion_name_10"></div>
         </div>
     </div>
@@ -86,7 +89,7 @@
 <div class="container-fluid p-0 border-b param-text">
     <div class="container-fluid d-flex p-0">
         <div class="col-1 py-1 align-items-center justify-content-center border-r" id="id_ability_power">
-            <img th:src="@{/images/parameters/ability_power.webp}" title="Сила умений" class="img-fluid" alt="Сила умений" style="height: 30px; width: auto;">
+            <img th:src="@{/images/parameters/ability_power.png}" title="Сила умений" class="img-fluid param-icon" alt="Сила умений">
         </div>
 
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_ability_power_1"></div>
@@ -105,7 +108,7 @@
     </div>
     <div class="container-fluid d-flex p-0">
         <div class="col-1 py-1 align-items-center justify-content-center border-r" id="id_attack_damage">
-            <img th:src="@{/images/parameters/attack_damage.webp}" title="Сила атаки" class="img-fluid" alt="Сила атаки" style="height: 30px; width: auto;">
+            <img th:src="@{/images/parameters/attack_damage.png}" title="Сила атаки" class="img-fluid param-icon" alt="Сила атаки">
         </div>
 
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_attack_damage_1"></div>
@@ -124,7 +127,7 @@
     </div>
     <div class="container-fluid d-flex p-0">
         <div class="col-1 py-1 align-items-center justify-content-center border-r" id="id_lifesteal">
-            <img th:src="@{/images/parameters/life_steal.webp}" title="Вампиризм" class="img-fluid" alt="Вампиризм" style="height: 30px; width: auto;">
+            <img th:src="@{/images/parameters/life_steal.png}" title="Вампиризм" class="img-fluid param-icon" alt="Вампиризм">
         </div>
 
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_lifesteal_1"></div>
@@ -143,7 +146,7 @@
     </div>
     <div class="container-fluid d-flex p-0">
         <div class="col-1 py-1 align-items-center justify-content-center border-r" id="id_attack_speed">
-            <img th:src="@{/images/parameters/attack_speed.webp}" title="Скорость атаки" class="img-fluid" alt="Скорость атаки" style="height: 30px; width: auto;">
+            <img th:src="@{/images/parameters/attack_speed.png}" title="Скорость атаки" class="img-fluid param-icon" alt="Скорость атаки">
         </div>
 
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_attack_speed_1"></div>
@@ -162,7 +165,7 @@
     </div>
     <div class="container-fluid d-flex p-0">
         <div class="col-1 py-1 align-items-center justify-content-center border-r" id="id_movement_speed">
-            <img th:src="@{/images/parameters/movement_speed.webp}" title="Скорость передвижения" class="img-fluid" alt="Скорость передвижения" style="height: 30px; width: auto;">
+            <img th:src="@{/images/parameters/movement_speed.png}" title="Скорость передвижения" class="img-fluid param-icon" alt="Скорость передвижения">
         </div>
 
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_movement_speed_1"></div>
@@ -181,7 +184,7 @@
     </div>
     <div class="container-fluid d-flex p-0">
         <div class="col-1 py-1 align-items-center justify-content-center border-r" id="id_armor">
-            <img th:src="@{/images/parameters/armor.webp}" title="Броня" class="img-fluid" alt="Броня" style="height: 30px; width: auto;">
+            <img th:src="@{/images/parameters/armor.png}" title="Броня" class="img-fluid param-icon" alt="Броня">
         </div>
 
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_armor_1"></div>
@@ -200,7 +203,7 @@
     </div>
     <div class="container-fluid d-flex p-0">
         <div class="col-1 py-1 align-items-center justify-content-center border-r" id="id_magic_resist">
-            <img th:src="@{/images/parameters/magic_resist.webp}" title="Сопротивление магии" class="img-fluid" alt="Сопротивление магии" style="height: 30px; width: auto;">
+            <img th:src="@{/images/parameters/magic_resist.png}" title="Сопротивление магии" class="img-fluid param-icon" alt="Сопротивление магии">
         </div>
 
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_magic_resist_1"></div>
@@ -219,7 +222,7 @@
     </div>
     <div class="container-fluid d-flex p-0">
         <div class="col-1 py-1 align-items-center justify-content-center border-r" id="id_health_max">
-            <img th:src="@{/images/parameters/health_max.webp}" title="Максимальное здоровье" class="img-fluid" alt="Максимальное здоровье" style="height: 30px; width: auto;">
+            <img th:src="@{/images/parameters/health_max.png}" title="Максимальный запас здоровья" class="img-fluid param-icon" alt="Максимальный запас здоровья">
         </div>
 
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_health_max_1"></div>
@@ -238,7 +241,7 @@
     </div>
     <div class="container-fluid d-flex p-0">
         <div class="col-1 py-1 align-items-center justify-content-center border-r" id="id_power_max">
-            <img th:src="@{/images/parameters/power_max.webp}" title="Максимальная сила" class="img-fluid" alt="Максимальная сила" style="height: 30px; width: auto;">
+            <img th:src="@{/images/parameters/power_max.png}" title="Максимальнй запас маны" class="img-fluid param-icon" alt="Максимальный запас маны">
         </div>
 
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_power_max_1"></div>
@@ -254,6 +257,25 @@
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_power_max_8"></div>
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_power_max_9"></div>
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_power_max_10"></div>
+    </div>
+    <div class="container-fluid d-flex p-0">
+        <div class="col-1 py-1 align-items-center justify-content-center border-r" id="id_kill">
+            <img th:src="@{/images/parameters/kill.png}" title="Количество убийств" class="img-fluid param-icon" alt="Количество убийств">
+        </div>
+
+        <div class="col-1 py-1 align-items-center justify-content-center" id="id_kill_1"></div>
+        <div class="col-1 py-1 align-items-center justify-content-center" id="id_kill_2"></div>
+        <div class="col-1 py-1 align-items-center justify-content-center" id="id_kill_3"></div>
+        <div class="col-1 py-1 align-items-center justify-content-center" id="id_kill_4"></div>
+        <div class="col-1 py-1 align-items-center justify-content-center" id="id_kill_5"></div>
+
+        <div class="col-1 py-1 align-items-center justify-content-center border-r border-l" id="id_kill_diff"></div>
+
+        <div class="col-1 py-1 align-items-center justify-content-center" id="id_kill_6"></div>
+        <div class="col-1 py-1 align-items-center justify-content-center" id="id_kill_7"></div>
+        <div class="col-1 py-1 align-items-center justify-content-center" id="id_kill_8"></div>
+        <div class="col-1 py-1 align-items-center justify-content-center" id="id_kill_9"></div>
+        <div class="col-1 py-1 align-items-center justify-content-center" id="id_kill_10"></div>
     </div>
 </div>
 
@@ -285,145 +307,166 @@ var intervalId = setInterval(function() {
                     $('#id_magic_resist_diff').html(Math.round(parseFloat(response.magicResist) * 1000) / 1000);
                     $('#id_health_max_diff').html(Math.round(parseFloat(response.healthMax) * 1000) / 1000);
                     $('#id_power_max_diff').html(Math.round(parseFloat(response.powerMax) * 1000) / 1000);
+                    $('#id_kill_diff').html(Math.round(parseFloat(response.kill) * 1000) / 1000);
                 }
 
                 if (index == 1) {
+                    $('#id_avatar_1').attr('title', response.summonerName);
                     $('#id_champion_name_1').html(response.championName);
-                    $('#id_ability_power_1').html(response.abilityPower);
-                    $('#id_attack_damage_1').html(response.attackDamage);
-                    $('#id_lifesteal_1').html(response.lifesteal);
-                    $('#id_attack_speed_1').html(response.attackSpeed);
-                    $('#id_movement_speed_1').html(response.movementSpeed);
-                    $('#id_armor_1').html(response.armor);
-                    $('#id_magic_resist_1').html(response.magicResist);
-                    $('#id_health_max_1').html(response.healthMax);
-                    $('#id_power_max_1').html(response.powerMax);
+                    $('#id_ability_power_1').html(Math.round(parseFloat(response.abilityPower) * 1000) / 1000);
+                    $('#id_attack_damage_1').html(Math.round(parseFloat(response.attackDamage) * 1000) / 1000);
+                    $('#id_lifesteal_1').html(Math.round(parseFloat(response.lifesteal) * 1000) / 1000);
+                    $('#id_attack_speed_1').html(Math.round(parseFloat(response.attackSpeed) * 1000) / 1000);
+                    $('#id_movement_speed_1').html(Math.round(parseFloat(response.movementSpeed) * 1000) / 1000);
+                    $('#id_armor_1').html(Math.round(parseFloat(response.armor) * 1000) / 1000);
+                    $('#id_magic_resist_1').html(Math.round(parseFloat(response.magicResist) * 1000) / 1000);
+                    $('#id_health_max_1').html(Math.round(parseFloat(response.healthMax) * 1000) / 1000);
+                    $('#id_power_max_1').html(Math.round(parseFloat(response.powerMax) * 1000) / 1000);
+                    $('#id_kill_1').html(Math.round(parseFloat(response.kill) * 1000) / 1000);
                     setChampIcon(response.rawChampionName, index);
                 }
 
                 if (index == 2) {
+                    $('#id_avatar_2').attr('title', response.summonerName);
                     $('#id_champion_name_2').html(response.championName);
-                    $('#id_ability_power_2').html(response.abilityPower);
-                    $('#id_attack_damage_2').html(response.attackDamage);
-                    $('#id_lifesteal_2').html(response.lifesteal);
-                    $('#id_attack_speed_2').html(response.attackSpeed);
-                    $('#id_movement_speed_2').html(response.movementSpeed);
-                    $('#id_armor_2').html(response.armor);
-                    $('#id_magic_resist_2').html(response.magicResist);
-                    $('#id_health_max_2').html(response.healthMax);
-                    $('#id_power_max_2').html(response.powerMax);
+                    $('#id_ability_power_2').html(Math.round(parseFloat(response.abilityPower) * 1000) / 1000);
+                    $('#id_attack_damage_2').html(Math.round(parseFloat(response.attackDamage) * 1000) / 1000);
+                    $('#id_lifesteal_2').html(Math.round(parseFloat(response.lifesteal) * 1000) / 1000);
+                    $('#id_attack_speed_2').html(Math.round(parseFloat(response.attackSpeed) * 1000) / 1000);
+                    $('#id_movement_speed_2').html(Math.round(parseFloat(response.movementSpeed) * 1000) / 1000);
+                    $('#id_armor_2').html(Math.round(parseFloat(response.armor) * 1000) / 1000);
+                    $('#id_magic_resist_2').html(Math.round(parseFloat(response.magicResist) * 1000) / 1000);
+                    $('#id_health_max_2').html(Math.round(parseFloat(response.healthMax) * 1000) / 1000);
+                    $('#id_power_max_2').html(Math.round(parseFloat(response.powerMax) * 1000) / 1000);
+                    $('#id_kill_2').html(Math.round(parseFloat(response.kill) * 1000) / 1000);
                     setChampIcon(response.rawChampionName, index);
                 }
 
                 if (index == 3) {
+                    $('#id_avatar_3').attr('title', response.summonerName);
                     $('#id_champion_name_3').html(response.championName);
-                    $('#id_ability_power_3').html(response.abilityPower);
-                    $('#id_attack_damage_3').html(response.attackDamage);
-                    $('#id_lifesteal_3').html(response.lifesteal);
-                    $('#id_attack_speed_3').html(response.attackSpeed);
-                    $('#id_movement_speed_3').html(response.movementSpeed);
-                    $('#id_armor_3').html(response.armor);
-                    $('#id_magic_resist_3').html(response.magicResist);
-                    $('#id_health_max_3').html(response.healthMax);
-                    $('#id_power_max_3').html(response.powerMax);
+                    $('#id_ability_power_3').html(Math.round(parseFloat(response.abilityPower) * 1000) / 1000);
+                    $('#id_attack_damage_3').html(Math.round(parseFloat(response.attackDamage) * 1000) / 1000);
+                    $('#id_lifesteal_3').html(Math.round(parseFloat(response.lifesteal) * 1000) / 1000);
+                    $('#id_attack_speed_3').html(Math.round(parseFloat(response.attackSpeed) * 1000) / 1000);
+                    $('#id_movement_speed_3').html(Math.round(parseFloat(response.movementSpeed) * 1000) / 1000);
+                    $('#id_armor_3').html(Math.round(parseFloat(response.armor) * 1000) / 1000);
+                    $('#id_magic_resist_3').html(Math.round(parseFloat(response.magicResist) * 1000) / 1000);
+                    $('#id_health_max_3').html(Math.round(parseFloat(response.healthMax) * 1000) / 1000);
+                    $('#id_power_max_3').html(Math.round(parseFloat(response.powerMax) * 1000) / 1000);
+                    $('#id_kill_3').html(Math.round(parseFloat(response.kill) * 1000) / 1000);
                     setChampIcon(response.rawChampionName, index);
                 }
 
                 if (index == 4) {
+                    $('#id_avatar_4').attr('title', response.summonerName);
                     $('#id_champion_name_4').html(response.championName);
-                    $('#id_ability_power_4').html(response.abilityPower);
-                    $('#id_attack_damage_4').html(response.attackDamage);
-                    $('#id_lifesteal_4').html(response.lifesteal);
-                    $('#id_attack_speed_4').html(response.attackSpeed);
-                    $('#id_movement_speed_4').html(response.movementSpeed);
-                    $('#id_armor_4').html(response.armor);
-                    $('#id_magic_resist_4').html(response.magicResist);
-                    $('#id_health_max_4').html(response.healthMax);
-                    $('#id_power_max_4').html(response.powerMax);
+                    $('#id_ability_power_4').html(Math.round(parseFloat(response.abilityPower) * 1000) / 1000);
+                    $('#id_attack_damage_4').html(Math.round(parseFloat(response.attackDamage) * 1000) / 1000);
+                    $('#id_lifesteal_4').html(Math.round(parseFloat(response.lifesteal) * 1000) / 1000);
+                    $('#id_attack_speed_4').html(Math.round(parseFloat(response.attackSpeed) * 1000) / 1000);
+                    $('#id_movement_speed_4').html(Math.round(parseFloat(response.movementSpeed) * 1000) / 1000);
+                    $('#id_armor_4').html(Math.round(parseFloat(response.armor) * 1000) / 1000);
+                    $('#id_magic_resist_4').html(Math.round(parseFloat(response.magicResist) * 1000) / 1000);
+                    $('#id_health_max_d4').html(Math.round(parseFloat(response.healthMax) * 1000) / 1000);
+                    $('#id_power_max_4').html(Math.round(parseFloat(response.powerMax) * 1000) / 1000);
+                    $('#id_kill_4').html(Math.round(parseFloat(response.kill) * 1000) / 1000);
                     setChampIcon(response.rawChampionName, index);
                 }
 
                 if (index == 5) {
+                    $('#id_avatar_5').attr('title', response.summonerName);
                     $('#id_champion_name_5').html(response.championName);
-                    $('#id_ability_power_5').html(response.abilityPower);
-                    $('#id_attack_damage_5').html(response.attackDamage);
-                    $('#id_lifesteal_5').html(response.lifesteal);
-                    $('#id_attack_speed_5').html(response.attackSpeed);
-                    $('#id_movement_speed_5').html(response.movementSpeed);
-                    $('#id_armor_5').html(response.armor);
-                    $('#id_magic_resist_5').html(response.magicResist);
-                    $('#id_health_max_5').html(response.healthMax);
-                    $('#id_power_max_5').html(response.powerMax);
+                    $('#id_ability_power_5').html(Math.round(parseFloat(response.abilityPower) * 1000) / 1000);
+                    $('#id_attack_damage_5').html(Math.round(parseFloat(response.attackDamage) * 1000) / 1000);
+                    $('#id_lifesteal_5').html(Math.round(parseFloat(response.lifesteal) * 1000) / 1000);
+                    $('#id_attack_speed_5').html(Math.round(parseFloat(response.attackSpeed) * 1000) / 1000);
+                    $('#id_movement_speed_5').html(Math.round(parseFloat(response.movementSpeed) * 1000) / 1000);
+                    $('#id_armor_5').html(Math.round(parseFloat(response.armor) * 1000) / 1000);
+                    $('#id_magic_resist_5').html(Math.round(parseFloat(response.magicResist) * 1000) / 1000);
+                    $('#id_health_max_5').html(Math.round(parseFloat(response.healthMax) * 1000) / 1000);
+                    $('#id_power_max_5').html(Math.round(parseFloat(response.powerMax) * 1000) / 1000);
+                    $('#id_kill_5').html(Math.round(parseFloat(response.kill) * 1000) / 1000);
                     setChampIcon(response.rawChampionName, index);
                 }
 
                 if (index == 6) {
+                    $('#id_avatar_6').attr('title', response.summonerName);
                     $('#id_champion_name_6').html(response.championName);
-                    $('#id_ability_power_6').html(response.abilityPower);
-                    $('#id_attack_damage_6').html(response.attackDamage);
-                    $('#id_lifesteal_6').html(response.lifesteal);
-                    $('#id_attack_speed_6').html(response.attackSpeed);
-                    $('#id_movement_speed_6').html(response.movementSpeed);
-                    $('#id_armor_6').html(response.armor);
-                    $('#id_magic_resist_6').html(response.magicResist);
-                    $('#id_health_max_6').html(response.healthMax);
-                    $('#id_power_max_6').html(response.powerMax);
+                    $('#id_ability_power_6').html(Math.round(parseFloat(response.abilityPower) * 1000) / 1000);
+                    $('#id_attack_damage_6').html(Math.round(parseFloat(response.attackDamage) * 1000) / 1000);
+                    $('#id_lifesteal_6').html(Math.round(parseFloat(response.lifesteal) * 1000) / 1000);
+                    $('#id_attack_speed_6').html(Math.round(parseFloat(response.attackSpeed) * 1000) / 1000);
+                    $('#id_movement_speed_6').html(Math.round(parseFloat(response.movementSpeed) * 1000) / 1000);
+                    $('#id_armor_6').html(Math.round(parseFloat(response.armor) * 1000) / 1000);
+                    $('#id_magic_resist_6').html(Math.round(parseFloat(response.magicResist) * 1000) / 1000);
+                    $('#id_health_max_6').html(Math.round(parseFloat(response.healthMax) * 1000) / 1000);
+                    $('#id_power_max_6').html(Math.round(parseFloat(response.powerMax) * 1000) / 1000);
+                    $('#id_kill_6').html(Math.round(parseFloat(response.kill) * 1000) / 1000);
                     setChampIcon(response.rawChampionName, index);
                 }
 
                 if (index == 7) {
+                    $('#id_avatar_7').attr('title', response.summonerName);
                     $('#id_champion_name_7').html(response.championName);
-                    $('#id_ability_power_7').html(response.abilityPower);
-                    $('#id_attack_damage_7').html(response.attackDamage);
-                    $('#id_lifesteal_7').html(response.lifesteal);
-                    $('#id_attack_speed_7').html(response.attackSpeed);
-                    $('#id_movement_speed_7').html(response.movementSpeed);
-                    $('#id_armor_7').html(response.armor);
-                    $('#id_magic_resist_7').html(response.magicResist);
-                    $('#id_health_max_7').html(response.healthMax);
-                    $('#id_power_max_7').html(response.powerMax);
+                    $('#id_ability_power_7').html(Math.round(parseFloat(response.abilityPower) * 1000) / 1000);
+                    $('#id_attack_damage_7').html(Math.round(parseFloat(response.attackDamage) * 1000) / 1000);
+                    $('#id_lifesteal_7').html(Math.round(parseFloat(response.lifesteal) * 1000) / 1000);
+                    $('#id_attack_speed_7').html(Math.round(parseFloat(response.attackSpeed) * 1000) / 1000);
+                    $('#id_movement_speed_7').html(Math.round(parseFloat(response.movementSpeed) * 1000) / 1000);
+                    $('#id_armor_7').html(Math.round(parseFloat(response.armor) * 1000) / 1000);
+                    $('#id_magic_resist_7').html(Math.round(parseFloat(response.magicResist) * 1000) / 1000);
+                    $('#id_health_max_7').html(Math.round(parseFloat(response.healthMax) * 1000) / 1000);
+                    $('#id_power_max_7').html(Math.round(parseFloat(response.powerMax) * 1000) / 1000);
+                    $('#id_kill_7').html(Math.round(parseFloat(response.kill) * 1000) / 1000);
                     setChampIcon(response.rawChampionName, index);
                 }
 
                 if (index == 8) {
+                    $('#id_avatar_8').attr('title', response.summonerName);
                     $('#id_champion_name_8').html(response.championName);
-                    $('#id_ability_power_8').html(response.abilityPower);
-                    $('#id_attack_damage_8').html(response.attackDamage);
-                    $('#id_lifesteal_8').html(response.lifesteal);
-                    $('#id_attack_speed_8').html(response.attackSpeed);
-                    $('#id_movement_speed_8').html(response.movementSpeed);
-                    $('#id_armor_8').html(response.armor);
-                    $('#id_magic_resist_8').html(response.magicResist);
-                    $('#id_health_max_8').html(response.healthMax);
-                    $('#id_power_max_8').html(response.powerMax);
+                    $('#id_ability_power_8').html(Math.round(parseFloat(response.abilityPower) * 1000) / 1000);
+                    $('#id_attack_damage_8').html(Math.round(parseFloat(response.attackDamage) * 1000) / 1000);
+                    $('#id_lifesteal_8').html(Math.round(parseFloat(response.lifesteal) * 1000) / 1000);
+                    $('#id_attack_speed_8').html(Math.round(parseFloat(response.attackSpeed) * 1000) / 1000);
+                    $('#id_movement_speed_8').html(Math.round(parseFloat(response.movementSpeed) * 1000) / 1000);
+                    $('#id_armor_8').html(Math.round(parseFloat(response.armor) * 1000) / 1000);
+                    $('#id_magic_resist_8').html(Math.round(parseFloat(response.magicResist) * 1000) / 1000);
+                    $('#id_health_max_8').html(Math.round(parseFloat(response.healthMax) * 1000) / 1000);
+                    $('#id_power_max_8').html(Math.round(parseFloat(response.powerMax) * 1000) / 1000);
+                    $('#id_kill_8').html(Math.round(parseFloat(response.kill) * 1000) / 1000);
                     setChampIcon(response.rawChampionName, index);
                 }
 
                 if (index == 9) {
+                    $('#id_avatar_9').attr('title', response.summonerName);
                     $('#id_champion_name_9').html(response.championName);
-                    $('#id_ability_power_9').html(response.abilityPower);
-                    $('#id_attack_damage_9').html(response.attackDamage);
-                    $('#id_lifesteal_9').html(response.lifesteal);
-                    $('#id_attack_speed_9').html(response.attackSpeed);
-                    $('#id_movement_speed_9').html(response.movementSpeed);
-                    $('#id_armor_9').html(response.armor);
-                    $('#id_magic_resist_9').html(response.magicResist);
-                    $('#id_health_max_9').html(response.healthMax);
-                    $('#id_power_max_9').html(response.powerMax);
+                    $('#id_ability_power_9').html(Math.round(parseFloat(response.abilityPower) * 1000) / 1000);
+                    $('#id_attack_damage_9').html(Math.round(parseFloat(response.attackDamage) * 1000) / 1000);
+                    $('#id_lifesteal_9').html(Math.round(parseFloat(response.lifesteal) * 1000) / 1000);
+                    $('#id_attack_speed_9').html(Math.round(parseFloat(response.attackSpeed) * 1000) / 1000);
+                    $('#id_movement_speed_9').html(Math.round(parseFloat(response.movementSpeed) * 1000) / 1000);
+                    $('#id_armor_9').html(Math.round(parseFloat(response.armor) * 1000) / 1000);
+                    $('#id_magic_resist_9').html(Math.round(parseFloat(response.magicResist) * 1000) / 1000);
+                    $('#id_health_max_9').html(Math.round(parseFloat(response.healthMax) * 1000) / 1000);
+                    $('#id_power_max_9').html(Math.round(parseFloat(response.powerMax) * 1000) / 1000);
+                    $('#id_kill_9').html(Math.round(parseFloat(response.kill) * 1000) / 1000);
                     setChampIcon(response.rawChampionName, index);
                 }
 
                 if (index == 10) {
+                    $('#id_avatar_10').attr('title', response.summonerName);
                     $('#id_champion_name_10').html(response.championName);
-                    $('#id_ability_power_10').html(response.abilityPower);
-                    $('#id_attack_damage_10').html(response.attackDamage);
-                    $('#id_lifesteal_10').html(response.lifesteal);
-                    $('#id_attack_speed_10').html(response.attackSpeed);
-                    $('#id_movement_speed_10').html(response.movementSpeed);
-                    $('#id_armor_10').html(response.armor);
-                    $('#id_magic_resist_10').html(response.magicResist);
-                    $('#id_health_max_10').html(response.healthMax);
-                    $('#id_power_max_10').html(response.powerMax);
+                    $('#id_ability_power_10').html(Math.round(parseFloat(response.abilityPower) * 1000) / 1000);
+                    $('#id_attack_damage_10').html(Math.round(parseFloat(response.attackDamage) * 1000) / 1000);
+                    $('#id_lifesteal_10').html(Math.round(parseFloat(response.lifesteal) * 1000) / 1000);
+                    $('#id_attack_speed_10').html(Math.round(parseFloat(response.attackSpeed) * 1000) / 1000);
+                    $('#id_movement_speed_10').html(Math.round(parseFloat(response.movementSpeed) * 1000) / 1000);
+                    $('#id_armor_10').html(Math.round(parseFloat(response.armor) * 1000) / 1000);
+                    $('#id_magic_resist_10').html(Math.round(parseFloat(response.magicResist) * 1000) / 1000);
+                    $('#id_health_max_10').html(Math.round(parseFloat(response.healthMax) * 1000) / 1000);
+                    $('#id_power_max_10').html(Math.round(parseFloat(response.powerMax) * 1000) / 1000);
+                    $('#id_kill_10').html(Math.round(parseFloat(response.kill) * 1000) / 1000);
                     setChampIcon(response.rawChampionName, index);
                 }
             }
@@ -435,6 +478,8 @@ var intervalId = setInterval(function() {
         index = 0;
     }
 }, 250);
+
+$('#id_win_chance').html(response.winChance);
 
 function setChampIcon(champName, index){
       $('#id_avatar_' + index).attr('src',"/images/champions/" + champName + ".webp");
@@ -510,5 +555,16 @@ function setChampIcon(champName, index){
     .param-text {
         font-size: 17.5px;
         overflow: hidden
+    }
+
+    .param-icon {
+        width: auto;
+        height: 15px;
+    }
+
+    .header-title-percent {
+        margin-top: 20px;
+        font-size: 30px;
+        color: #570267;
     }
 </style>
