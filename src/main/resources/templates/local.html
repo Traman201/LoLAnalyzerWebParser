@@ -27,7 +27,7 @@
 
         <div class="col-1 py-1 bg-blue">
             <div class="align-items-center justify-content-center player-name" id="id_summoner_name_1"></div>
-            <div><img th:src="@{/images/champions/Akali.webp}" class="img-fluid" alt="Игрок 1"></div>
+            <div id="id_div_avatar_1"><img th:src="" class="img-fluid" id="id_avatar_1" alt="Игрок 1"></div>
             <div class="align-items-center justify-content-center champion-name" id="id_champion_name_1"></div>
         </div>
         <div class="col-1 py-1 bg-blue">
@@ -85,7 +85,9 @@
 
 <div class="container-fluid p-0 border-b param-text">
     <div class="container-fluid d-flex p-0">
-        <div class="col-1 py-1 align-items-center border-r" id="id_ability_power">Сила умений</div>
+        <div class="col-1 py-1 align-items-center justify-content-center border-r" id="id_ability_power">
+            <img th:src="@{/images/parameters/ability_power.webp}" title="Сила умений" class="img-fluid" alt="Сила умений" style="height: 30px; width: auto;">
+        </div>
 
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_ability_power_1"></div>
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_ability_power_2"></div>
@@ -102,7 +104,9 @@
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_ability_power_10"></div>
     </div>
     <div class="container-fluid d-flex p-0">
-        <div class="col-1 py-1 align-items-center border-r" id="id_attack_damage">Сила атаки</div>
+        <div class="col-1 py-1 align-items-center justify-content-center border-r" id="id_attack_damage">
+            <img th:src="@{/images/parameters/attack_damage.webp}" title="Сила атаки" class="img-fluid" alt="Сила атаки" style="height: 30px; width: auto;">
+        </div>
 
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_attack_damage_1"></div>
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_attack_damage_2"></div>
@@ -119,7 +123,9 @@
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_attack_damage_10"></div>
     </div>
     <div class="container-fluid d-flex p-0">
-        <div class="col-1 py-1 align-items-center border-r" id="id_lifesteal">Вампиризм</div>
+        <div class="col-1 py-1 align-items-center justify-content-center border-r" id="id_lifesteal">
+            <img th:src="@{/images/parameters/life_steal.webp}" title="Вампиризм" class="img-fluid" alt="Вампиризм" style="height: 30px; width: auto;">
+        </div>
 
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_lifesteal_1"></div>
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_lifesteal_2"></div>
@@ -136,7 +142,9 @@
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_lifesteal_10"></div>
     </div>
     <div class="container-fluid d-flex p-0">
-        <div class="col-1 py-1 align-items-center border-r" id="id_attack_speed">Скорость атаки</div>
+        <div class="col-1 py-1 align-items-center justify-content-center border-r" id="id_attack_speed">
+            <img th:src="@{/images/parameters/attack_speed.webp}" title="Скорость атаки" class="img-fluid" alt="Скорость атаки" style="height: 30px; width: auto;">
+        </div>
 
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_attack_speed_1"></div>
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_attack_speed_2"></div>
@@ -153,7 +161,9 @@
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_attack_speed_10"></div>
     </div>
     <div class="container-fluid d-flex p-0">
-        <div class="col-1 py-1 align-items-center border-r" id="id_movement_speed">Скорость передвижения</div>
+        <div class="col-1 py-1 align-items-center justify-content-center border-r" id="id_movement_speed">
+            <img th:src="@{/images/parameters/movement_speed.webp}" title="Скорость передвижения" class="img-fluid" alt="Скорость передвижения" style="height: 30px; width: auto;">
+        </div>
 
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_movement_speed_1"></div>
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_movement_speed_2"></div>
@@ -170,7 +180,9 @@
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_movement_speed_10"></div>
     </div>
     <div class="container-fluid d-flex p-0">
-        <div class="col-1 py-1 align-items-center border-r" id="id_armor">Броня</div>
+        <div class="col-1 py-1 align-items-center justify-content-center border-r" id="id_armor">
+            <img th:src="@{/images/parameters/armor.webp}" title="Броня" class="img-fluid" alt="Броня" style="height: 30px; width: auto;">
+        </div>
 
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_armor_1"></div>
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_armor_2"></div>
@@ -187,7 +199,9 @@
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_armor_10"></div>
     </div>
     <div class="container-fluid d-flex p-0">
-        <div class="col-1 py-1 align-items-center border-r" id="id_magic_resist">Сопротивление магии</div>
+        <div class="col-1 py-1 align-items-center justify-content-center border-r" id="id_magic_resist">
+            <img th:src="@{/images/parameters/magic_resist.webp}" title="Сопротивление магии" class="img-fluid" alt="Сопротивление магии" style="height: 30px; width: auto;">
+        </div>
 
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_magic_resist_1"></div>
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_magic_resist_2"></div>
@@ -204,7 +218,9 @@
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_magic_resist_10"></div>
     </div>
     <div class="container-fluid d-flex p-0">
-        <div class="col-1 py-1 align-items-center border-r" id="id_health_max">Максимальное здоровье</div>
+        <div class="col-1 py-1 align-items-center justify-content-center border-r" id="id_health_max">
+            <img th:src="@{/images/parameters/health_max.webp}" title="Максимальное здоровье" class="img-fluid" alt="Максимальное здоровье" style="height: 30px; width: auto;">
+        </div>
 
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_health_max_1"></div>
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_health_max_2"></div>
@@ -221,7 +237,9 @@
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_health_max_10"></div>
     </div>
     <div class="container-fluid d-flex p-0">
-        <div class="col-1 py-1 align-items-center border-r" id="id_power_max">Максимальная сила</div>
+        <div class="col-1 py-1 align-items-center justify-content-center border-r" id="id_power_max">
+            <img th:src="@{/images/parameters/power_max.webp}" title="Максимальная сила" class="img-fluid" alt="Максимальная сила" style="height: 30px; width: auto;">
+        </div>
 
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_power_max_1"></div>
         <div class="col-1 py-1 align-items-center justify-content-center" id="id_power_max_2"></div>
@@ -258,15 +276,15 @@ var intervalId = setInterval(function() {
             }
             else{
                 if (index == 0) {
-                    $('#id_ability_power_diff').html(response.abilityPower);
-                    $('#id_attack_damage_diff').html(response.attackDamage);
-                    $('#id_lifesteal_diff').html(response.lifesteal);
-                    $('#id_attack_speed_diff').html(response.attackSpeed);
-                    $('#id_movement_speed_diff').html(response.movementSpeed);
-                    $('#id_armor_diff').html(response.armor);
-                    $('#id_magic_resist_diff').html(response.magicResist);
-                    $('#id_health_max_diff').html(response.healthMax);
-                    $('#id_power_max_diff').html(response.powerMax);
+                    $('#id_ability_power_diff').html(Math.round(parseFloat(response.abilityPower) * 1000) / 1000);
+                    $('#id_attack_damage_diff').html(Math.round(parseFloat(response.attackDamage) * 1000) / 1000);
+                    $('#id_lifesteal_diff').html(Math.round(parseFloat(response.lifesteal) * 1000) / 1000);
+                    $('#id_attack_speed_diff').html(Math.round(parseFloat(response.attackSpeed) * 1000) / 1000);
+                    $('#id_movement_speed_diff').html(Math.round(parseFloat(response.movementSpeed) * 1000) / 1000);
+                    $('#id_armor_diff').html(Math.round(parseFloat(response.armor) * 1000) / 1000);
+                    $('#id_magic_resist_diff').html(Math.round(parseFloat(response.magicResist) * 1000) / 1000);
+                    $('#id_health_max_diff').html(Math.round(parseFloat(response.healthMax) * 1000) / 1000);
+                    $('#id_power_max_diff').html(Math.round(parseFloat(response.powerMax) * 1000) / 1000);
                 }
 
                 if (index == 1) {
@@ -403,7 +421,7 @@ var intervalId = setInterval(function() {
     });
 
     index++;
-    if(index > 10){
+    if(index > 9){
         index = 0;
     }
 }, 250);
@@ -418,12 +436,13 @@ var intervalId = setInterval(function() {
             if(!response.working){
                 return;
             }
-            var img = $('<img id="image_id">');
+
+            var img = $('<img id="id_avatar_"+imgIndex>');
             img.attr('src', 'data:image/png;base64,' + response);
-            img.appendTo('#image_div');
+            img.appendTo('#id_div_avatar_'+ imgIndex);
 
     imgIndex++;
-    if(imgIndex > 10){
+    if(imgIndex > 9){
         imgIndex = 0;
     }
 }, 1000);
@@ -491,9 +510,11 @@ var intervalId = setInterval(function() {
         padding-top: 5px;
         font-weight: bold;
         font-size: 18px;
+        text-align: center;
     }
 
     .param-text {
         font-size: 17.5px;
+        overflow: hidden
     }
 </style>
