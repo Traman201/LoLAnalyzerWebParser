@@ -298,6 +298,7 @@ var intervalId = setInterval(function() {
                     $('#id_magic_resist_1').html(response.magicResist);
                     $('#id_health_max_1').html(response.healthMax);
                     $('#id_power_max_1').html(response.powerMax);
+                    setChampIcon(response.rawChampionName, index);
                 }
 
                 if (index == 2) {
@@ -311,6 +312,7 @@ var intervalId = setInterval(function() {
                     $('#id_magic_resist_2').html(response.magicResist);
                     $('#id_health_max_2').html(response.healthMax);
                     $('#id_power_max_2').html(response.powerMax);
+                    setChampIcon(response.rawChampionName, index);
                 }
 
                 if (index == 3) {
@@ -324,6 +326,7 @@ var intervalId = setInterval(function() {
                     $('#id_magic_resist_3').html(response.magicResist);
                     $('#id_health_max_3').html(response.healthMax);
                     $('#id_power_max_3').html(response.powerMax);
+                    setChampIcon(response.rawChampionName, index);
                 }
 
                 if (index == 4) {
@@ -337,6 +340,7 @@ var intervalId = setInterval(function() {
                     $('#id_magic_resist_4').html(response.magicResist);
                     $('#id_health_max_4').html(response.healthMax);
                     $('#id_power_max_4').html(response.powerMax);
+                    setChampIcon(response.rawChampionName, index);
                 }
 
                 if (index == 5) {
@@ -350,6 +354,7 @@ var intervalId = setInterval(function() {
                     $('#id_magic_resist_5').html(response.magicResist);
                     $('#id_health_max_5').html(response.healthMax);
                     $('#id_power_max_5').html(response.powerMax);
+                    setChampIcon(response.rawChampionName, index);
                 }
 
                 if (index == 6) {
@@ -363,6 +368,7 @@ var intervalId = setInterval(function() {
                     $('#id_magic_resist_6').html(response.magicResist);
                     $('#id_health_max_6').html(response.healthMax);
                     $('#id_power_max_6').html(response.powerMax);
+                    setChampIcon(response.rawChampionName, index);
                 }
 
                 if (index == 7) {
@@ -376,6 +382,7 @@ var intervalId = setInterval(function() {
                     $('#id_magic_resist_7').html(response.magicResist);
                     $('#id_health_max_7').html(response.healthMax);
                     $('#id_power_max_7').html(response.powerMax);
+                    setChampIcon(response.rawChampionName, index);
                 }
 
                 if (index == 8) {
@@ -389,6 +396,7 @@ var intervalId = setInterval(function() {
                     $('#id_magic_resist_8').html(response.magicResist);
                     $('#id_health_max_8').html(response.healthMax);
                     $('#id_power_max_8').html(response.powerMax);
+                    setChampIcon(response.rawChampionName, index);
                 }
 
                 if (index == 9) {
@@ -402,6 +410,7 @@ var intervalId = setInterval(function() {
                     $('#id_magic_resist_9').html(response.magicResist);
                     $('#id_health_max_9').html(response.healthMax);
                     $('#id_power_max_9').html(response.powerMax);
+                    setChampIcon(response.rawChampionName, index);
                 }
 
                 if (index == 10) {
@@ -415,7 +424,7 @@ var intervalId = setInterval(function() {
                     $('#id_magic_resist_10').html(response.magicResist);
                     $('#id_health_max_10').html(response.healthMax);
                     $('#id_power_max_10').html(response.powerMax);
-                    setChampIcon(response.rawChampionName, index-1);
+                    setChampIcon(response.rawChampionName, index);
                 }
             }
          }
@@ -428,19 +437,7 @@ var intervalId = setInterval(function() {
 }, 250);
 
 function setChampIcon(champName, index){
-    $.ajax({
-            type: "GET",
-            url: "/images/champions/" + champName + ".webp",
-
-            success: function(response){
-
-                var img = $('<img id="id_avatar_"+index>');
-                img.attr('src', 'data:image/webp;base64' + response);
-                img.appendTo('#id_div_avatar_'+ index);
-
-                }
-
-    });
+      $('#id_avatar_' + index).attr('src',"/images/champions/" + champName + ".webp");
 }
 
 
