@@ -242,6 +242,7 @@
 <script type="text/javascript">
 
 var index = 0;
+var imgIndex = 0;
 
 var intervalId = setInterval(function() {
   $.ajax({
@@ -406,6 +407,26 @@ var intervalId = setInterval(function() {
         index = 0;
     }
 }, 250);
+
+var intervalId = setInterval(function() {
+  $.ajax({
+        type: "GET",
+        url: "/local/status",
+        data: jQuery.param({index: imgIndex}),
+
+        success: function(response){
+            if(!response.working){
+                return;
+            }
+            var img = $('<img id="image_id">');
+            img.attr('src', 'data:image/png;base64,' + response);
+            img.appendTo('#image_div');
+
+    imgIndex++;
+    if(imgIndex > 10){
+        imgIndex = 0;
+    }
+}, 1000);
 
 </script>
 

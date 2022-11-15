@@ -8,10 +8,20 @@ import com.lolanalyzer.parcer.service.game.Champion;
 import com.lolanalyzer.parcer.service.game.LocalRequester;
 import com.lolanalyzer.parcer.service.game.Team;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.support.ServletContextResource;
+
+import javax.print.attribute.standard.Media;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.nio.file.Paths;
 
 /**
  * Контроллер эмуляции локального клиента
@@ -20,6 +30,9 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RequestMapping("/local")
 public class LocalClientController {
+
+    @Autowired
+    ServletContext context;
 
     @Autowired
     TeamDiffCalculator calculator;
@@ -118,5 +131,82 @@ public class LocalClientController {
         requester.setWinChance(winChance);
         n.setKeepWorking(requester.isGameStarted());
         return n;
+    }
+/*
+    @GetMapping(value = "/image")
+    public void getImageAsByteArray(@RequestParam int index, HttpServletResponse response) throws IOException {
+        if(!requester.isGameStarted()){
+            return;
+        }
+        if(calculator.getChaos().getChampions().size() + calculator.getOrder().getChampions().size() != 10){
+            return;
+        }
+        Team team = null;
+        if(index < 5){
+            team = calculator.getOrder();
+        }else{
+            index -= 5;
+            team = calculator.getChaos();
+        }
+        Champion champion = team.getChampions().get(index);
+
+        InputStream in = context.getResourceAsStream("src/main/resources/static/images/champions/" + champion.getRawChampionName() + ".webp");
+        System.out.println("/images/champions/" + champion.getRawChampionName() + ".webp");
+        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+        IOUtils.copy(in, response.getOutputStream());
+    }
+*/
+  /*  @GetMapping(value = "/image")
+    public @ResponseBody ResponseEntity<Resource> getImageAsResource(@RequestParam int index) throws FileNotFoundException {
+        if(!requester.isGameStarted()){
+            return null;
+        }
+        if(calculator.getChaos().getChampions().size() + calculator.getOrder().getChampions().size() != 10){
+            return null;
+        }
+        Team team = null;
+        if(index < 5){
+            team = calculator.getOrder();
+        }else{
+            index -= 5;
+            team = calculator.getChaos();
+        }
+        Champion champion = team.getChampions().get(index);
+        File pdfFile = Paths.get("src/main/resources/static/images/champions/" + champion.getRawChampionName() + ".webp").toFile();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+        headers.add("Pragma", "no-cache");
+        headers.add("Expires", "0");
+        Resource resource =
+                new ServletContextResource(context, "/WEB-INF/images/image-example.jpg");
+
+        return ResponseEntity.ok().headers(headers).contentLength(pdfFile.length())
+                .contentType(MediaType.parseMediaType("image/webp"))
+                .body(new Res(pdfFile));
+    }*/
+
+    @GetMapping(value = "/image")
+    public ResponseEntity<byte[]> getImageAsResponseEntity(@RequestParam int index) throws IOException {
+        if(!requester.isGameStarted()){
+            return null;
+        }
+        if(calculator.getChaos().getChampions().size() + calculator.getOrder().getChampions().size() != 10){
+            return null;
+        }
+        Team team = null;
+        if(index < 5){
+            team = calculator.getOrder();
+        }else{
+            index -= 5;
+            team = calculator.getChaos();
+        }
+        Champion champion = team.getChampions().get(index);
+        HttpHeaders headers = new HttpHeaders();
+        InputStream in = context.getResourceAsStream("/WEB-INF/champions/" + champion.getRawChampionName() + ".webp");
+        headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+        headers.setContentType(MediaType.IMAGE_PNG);
+        ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(in.readAllBytes(), headers, HttpStatus.OK);
+        return responseEntity;
     }
 }
