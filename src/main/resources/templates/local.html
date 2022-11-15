@@ -32,22 +32,22 @@
         </div>
         <div class="col-1 py-1 bg-blue">
             <div class="align-items-center justify-content-center player-name" id="id_summoner_name_2"></div>
-            <div><img th:src="@{/images/champions/Akali.webp}" class="img-fluid" alt="Игрок 2"></div>
+            <div id="id_div_avatar_2"><img src="" class="img-fluid" id="id_avatar_2" alt="Игрок 2"></div>
             <div class="align-items-center justify-content-center champion-name" id="id_champion_name_2"></div>
         </div>
         <div class="col-1 py-1 bg-blue">
             <div class="align-items-center justify-content-center player-name" id="id_summoner_name_3"></div>
-            <div><img th:src="@{/images/champions/Akali.webp}" class="img-fluid" alt="Игрок 3"></div>
+            <div id="id_div_avatar_3"><img src="" class="img-fluid" id="id_avatar_3" alt="Игрок 3"></div>
             <div class="align-items-center justify-content-center champion-name" id="id_champion_name_3"></div>
         </div>
         <div class="col-1 py-1 bg-blue">
             <div class="align-items-center justify-content-center player-name" id="id_summoner_name_4"></div>
-            <div><img th:src="@{/images/champions/Akali.webp}" class="img-fluid" alt="Игрок 4"></div>
+            <div id="id_div_avatar_4"><img src="" class="img-fluid" id="id_avatar_4" alt="Игрок 4"></div>
             <div class="align-items-center justify-content-center champion-name" id="id_champion_name_4"></div>
         </div>
         <div class="col-1 py-1 bg-blue">
             <div class="align-items-center justify-content-center player-name" id="id_summoner_name_5"></div>
-            <div><img th:src="@{/images/champions/Akali.webp}" class="img-fluid" alt="Игрок 5"></div>
+            <div id="id_div_avatar_5"><img src="" class="img-fluid" id="id_avatar_5" alt="Игрок 5"></div>
             <div class="align-items-center justify-content-center champion-name" id="id_champion_name_5"></div>
         </div>
 
@@ -57,27 +57,27 @@
 
         <div class="col-1 py-1 bg-red">
             <div class="align-items-center justify-content-center player-name" id="id_summoner_name_6"></div>
-            <div><img th:src="@{/images/champions/Akali.webp}" class="img-fluid" alt="Игрок 6"></div>
+            <div id="id_div_avatar_6"><img src="" class="img-fluid" id="id_avatar_6" alt="Игрок 6"></div>
             <div class="align-items-center justify-content-center champion-name" id="id_champion_name_6"></div>
         </div>
         <div class="col-1 py-1 bg-red">
             <div class="align-items-center justify-content-center player-name" id="id_summoner_name_7"></div>
-            <div><img th:src="@{/images/champions/Akali.webp}" class="img-fluid" alt="Игрок 7"></div>
+            <div id="id_div_avatar_7"><img src="" class="img-fluid" id="id_avatar_7" alt="Игрок 7"></div>
             <div class="align-items-center justify-content-center champion-name" id="id_champion_name_7"></div>
         </div>
         <div class="col-1 py-1 bg-red">
             <div class="align-items-center justify-content-center player-name" id="id_summoner_name_8"></div>
-            <div><img th:src="@{/images/champions/Akali.webp}" class="img-fluid" alt="Игрок 8"></div>
+            <div id="id_div_avatar_8"><img src="" class="img-fluid" id="id_avatar_8" alt="Игрок 8"></div>
             <div class="align-items-center justify-content-center champion-name" id="id_champion_name_8"></div>
         </div>
         <div class="col-1 py-1 bg-red">
             <div class="align-items-center justify-content-center player-name" id="id_summoner_name_9"></div>
-            <div><img th:src="@{/images/champions/Akali.webp}" class="img-fluid" alt="Игрок 9"></div>
+            <div id="id_div_avatar_9"><img src="" class="img-fluid" id="id_avatar_9" alt="Игрок 9"></div>
             <div class="align-items-center justify-content-center champion-name" id="id_champion_name_9"></div>
         </div>
         <div class="col-1 py-1 bg-red">
             <div class="align-items-center justify-content-center player-name" id="id_summoner_name_10"></div>
-            <div><img th:src="@{/images/champions/Akali.webp}" class="img-fluid" alt="Игрок 10"></div>
+            <div id="id_div_avatar_10"><img src="" class="img-fluid" id="id_avatar_10" alt="Игрок 10"></div>
             <div class="align-items-center justify-content-center champion-name" id="id_champion_name_10"></div>
         </div>
     </div>
@@ -298,7 +298,6 @@ var intervalId = setInterval(function() {
                     $('#id_magic_resist_1').html(response.magicResist);
                     $('#id_health_max_1').html(response.healthMax);
                     $('#id_power_max_1').html(response.powerMax);
-                    setChampIcon(response.rawChampionName, index-1);
                 }
 
                 if (index == 2) {
@@ -312,7 +311,6 @@ var intervalId = setInterval(function() {
                     $('#id_magic_resist_2').html(response.magicResist);
                     $('#id_health_max_2').html(response.healthMax);
                     $('#id_power_max_2').html(response.powerMax);
-                    setChampIcon(response.rawChampionName, index-1);
                 }
 
                 if (index == 3) {
@@ -326,7 +324,6 @@ var intervalId = setInterval(function() {
                     $('#id_magic_resist_3').html(response.magicResist);
                     $('#id_health_max_3').html(response.healthMax);
                     $('#id_power_max_3').html(response.powerMax);
-                    setChampIcon(response.rawChampionName, index-1);
                 }
 
                 if (index == 4) {
@@ -340,7 +337,6 @@ var intervalId = setInterval(function() {
                     $('#id_magic_resist_4').html(response.magicResist);
                     $('#id_health_max_4').html(response.healthMax);
                     $('#id_power_max_4').html(response.powerMax);
-                    setChampIcon(response.rawChampionName, index-1);
                 }
 
                 if (index == 5) {
@@ -354,7 +350,6 @@ var intervalId = setInterval(function() {
                     $('#id_magic_resist_5').html(response.magicResist);
                     $('#id_health_max_5').html(response.healthMax);
                     $('#id_power_max_5').html(response.powerMax);
-                    setChampIcon(response.rawChampionName, index-1);
                 }
 
                 if (index == 6) {
@@ -368,7 +363,6 @@ var intervalId = setInterval(function() {
                     $('#id_magic_resist_6').html(response.magicResist);
                     $('#id_health_max_6').html(response.healthMax);
                     $('#id_power_max_6').html(response.powerMax);
-                    setChampIcon(response.rawChampionName, index-1);
                 }
 
                 if (index == 7) {
@@ -382,7 +376,6 @@ var intervalId = setInterval(function() {
                     $('#id_magic_resist_7').html(response.magicResist);
                     $('#id_health_max_7').html(response.healthMax);
                     $('#id_power_max_7').html(response.powerMax);
-                    setChampIcon(response.rawChampionName, index-1);
                 }
 
                 if (index == 8) {
@@ -396,7 +389,6 @@ var intervalId = setInterval(function() {
                     $('#id_magic_resist_8').html(response.magicResist);
                     $('#id_health_max_8').html(response.healthMax);
                     $('#id_power_max_8').html(response.powerMax);
-                    setChampIcon(response.rawChampionName, index-1);
                 }
 
                 if (index == 9) {
@@ -410,7 +402,6 @@ var intervalId = setInterval(function() {
                     $('#id_magic_resist_9').html(response.magicResist);
                     $('#id_health_max_9').html(response.healthMax);
                     $('#id_power_max_9').html(response.powerMax);
-                    setChampIcon(response.rawChampionName, index-1);
                 }
 
                 if (index == 10) {
