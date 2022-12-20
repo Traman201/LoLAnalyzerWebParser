@@ -1,11 +1,18 @@
 package com.lolanalyzer.parcer.repositiory;
 
-import com.lolanalyzer.parcer.entity.Game;
+import com.lolanalyzer.parcer.entity.Match;
+import com.lolanalyzer.parcer.entytiId.MatchId;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-public interface GameRepository extends CrudRepository<Game, String> {
+import java.util.Optional;
 
-    Game save(Game game);
+public interface GameRepository extends CrudRepository<Match, MatchId> {
 
-    Iterable<Game> findAll();
+    Match save(Match game);
+
+    Iterable<Match> findAll();
+
+    Optional<Match> findById(MatchId id);
+
 }

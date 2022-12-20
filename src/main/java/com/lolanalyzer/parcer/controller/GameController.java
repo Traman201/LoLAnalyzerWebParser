@@ -1,68 +1,125 @@
 package com.lolanalyzer.parcer.controller;
 
-import com.lolanalyzer.parcer.entity.Game;
-import com.lolanalyzer.parcer.repositiory.GameRepository;
+import com.lolanalyzer.parcer.controller.helpers.GameControllerMessenger;
+import com.lolanalyzer.parcer.controller.helpers.Message;
+import com.lolanalyzer.parcer.entity.Match;
+import com.lolanalyzer.parcer.entity.Participant;
+import com.lolanalyzer.parcer.riotapi.MatchAPI;
+import com.lolanalyzer.parcer.riotapi.RiotAPIConfiguration;
+import com.lolanalyzer.parcer.service.DataDump;
+import com.lolanalyzer.parcer.service.MatchRepositoryManager;
 import lombok.extern.slf4j.Slf4j;
-import netscape.javascript.JSObject;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.json.JsonParser;
-import org.springframework.boot.json.JsonParserFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
-
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.Objects;
 
+/**
+ * Контроллер таблицы с записями игр из базы данных
+ * */
 @Controller
 @Slf4j
 @RequestMapping("/game")
 public class GameController {
 
-    private GameRepository gameRepository;
+    @Autowired
+    MatchRepositoryManager matchManager;
 
     @Autowired
-    public GameController(GameRepository gameRepository){
-        this.gameRepository = gameRepository;
-    }
+    GameControllerMessenger messenger;
+
+    @Autowired
+    DataDump dataDump;
+
+
+    /**
+     * Вызов макета game.html
+     * */
     @GetMapping
     public String gameForm(Model model){
-        ArrayList<Game> games = (ArrayList<Game>) gameRepository.findAll();
+        ArrayList<Match> games = (ArrayList<Match>) matchManager.getGameRepository().findAll();
         model.addAttribute("games", games);
+        model.addAttribute("apikey", RiotAPIConfiguration.getInstance().getApiKey());
+        model.addAttribute("availableParses", dataDump.getTypes());
+
+
+        if(messenger.hasMessages()){
+            model.addAttribute("messages", messenger.getMessages());
+        }
 
         return "game";
     }
 
-    @PostMapping("/add")
-    public String addGame(@RequestBody String gameInfo) {
+    /**
+     * Вызов макета подробной информации о матче
+     *
+     * @param matchId ID запрашиваемого матча. Берется из адресной строки
+     * */
+    @GetMapping("/{matchId}")
+    public String matchInfoForm(Model model, @PathVariable String matchId){
 
-        JSONObject root = new JSONObject(gameInfo);
-        JSONObject metadata = root.getJSONObject("metadata");
+        ArrayList<Participant> participants = new ArrayList<>();
 
-        JSONObject info = root.getJSONObject("info");
+        participants = (ArrayList<Participant>) matchManager.getParticipantRepository().findAllByIdMatchId(MatchAPI.constructMatchId(matchId));
+        model.addAttribute("participants", participants);
 
-        Game game = new Game();
+        return "matchInfo";
+    }
 
-        game.setGameCreation(info.getLong("gameCreation"));
-        game.setGameDuration(info.getLong("gameDuration"));
-        game.setGameMode(info.getString("gameMode"));
-        game.setGameName(info.getString("gameName"));
-        game.setGameType(info.getString("gameType"));
-        game.setGameVersion(info.getString("gameVersion"));
-        game.setGameEndTimestamp(info.getLong("gameEndTimestamp"));
-        game.setGameStartTimestamp(info.getLong("gameStartTimestamp"));
-        game.setMatchId(metadata.getString("matchId"));
+    /**
+     * Ручное добавление матча
+     *
+     * @param matchID ID запрашиваемого матча
+     * @param apiKey API-ключ аккаунта разработчика Riot Games
+     * */
+    @PostMapping()
+    public String addGame(@RequestParam String matchID, @RequestParam String apiKey) {
+        RiotAPIConfiguration.getInstance().setApiKey(apiKey);
+        long startTime = System.currentTimeMillis();
+        long parsedTime;
+        long savedTime;
+        try {
+            Match match = MatchAPI.getMatch(matchID);
+            parsedTime = System.currentTimeMillis();
+            log.info("[" + System.currentTimeMillis() + "]" + " DB writing");
+            if(!matchManager.saveMatch(match)){
+                messenger.addMessage("Ошибка записи в базу данных", Message.MessageType.ERROR);
+            }
+            else{
+                messenger.addMessage("Запись успешно добавлена", Message.MessageType.SUCCESS);
+            }
+            savedTime = System.currentTimeMillis();
 
-        gameRepository.save(game);
+            log.info("Parsed in " + (parsedTime - startTime) / 1000.0 + " Saved in " + (savedTime - parsedTime) / 1000.0);
+        } catch (IOException e) {
+            messenger.addMessage("Ошибка получения информации о матче", Message.MessageType.ERROR);
+        }
 
-        log.info(metadata.getString("matchId"));
 
         return "redirect:/game";
     }
+
+    /**
+     * Запрос на выгрузку датасета
+     *
+     * @param dumpType Ключ спецификации датасета. Чаще всего соответствует номеру задачи, в рамках которой она была составлена
+     * */
+    @GetMapping("/dump")
+    public String dumpGame(@RequestParam String dumpType){
+        if(dataDump.dump(dumpType)){
+            messenger.addMessage("Запись успешно сохранена", Message.MessageType.SUCCESS);
+        }
+        else {
+            messenger.addMessage("Ошибка записи датасета", Message.MessageType.ERROR);
+        }
+
+        return "redirect:/game";
+
+    }
+
 
 
 }

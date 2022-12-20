@@ -9,37 +9,77 @@
 </head>
 <body>
 <h1>Games</h1>
+<th:block th:each="message : ${messages}">
+    <th:block th:if="${message.type.ordinal() == 0}">
+        <div class="alert alert-primary" role="alert">
+            <th:block th:text="${message.text}"> </th:block>
+        </div>
+    </th:block>
+    <th:block th:if="${message.type.ordinal() == 1}">
+        <div class="alert alert-danger" role="alert">
+            <th:block th:text="${message.text}"> </th:block>
+        </div>
+    </th:block>
+    <th:block th:if="${message.type.ordinal() == 2}">
+        <div class="alert alert-success" role="alert">
+            <th:block th:text="${message.text}"> </th:block>
+        </div>
+    </th:block>
+</th:block>
+
+<div style="display: flex">
+    <div class="input-group mb-3" style="margin: 20px; ">
+        <form method="get" th:action="@{/game/dump}">
+            <select name="dumpType">
+                <th:block th:each="availableParse : ${availableParses}" >
+                    <option th:value="${availableParse}" th:text="${availableParse}"></option>
+                </th:block>
+            </select>
+            <br>
+            <div class="input-group-append" style="margin-top:10px">
+                <button class="btn btn-outline-secondary" type="submit">Загрузить</button>
+            </div>
+        </form>
+    </div>
+    <div class="input-group mb-3" style="align: right">
+        <form method="post">
+            <input type="text" class="form-control" placeholder="matchId"  aria-describedby="basic-addon2" name="matchID">
+            <br>
+            <input type="text" class="form-control" placeholder="api Key"  aria-describedby="basic-addon2" name="apiKey" th:value="${apikey}">
+            <div class="input-group-append" style="margin-top:10px">
+                <button class="btn btn-outline-secondary" type="submit">Send</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <table class="table">
     <thead class="thead-dark">
     <tr>
         <th scope="col">Id</th>
-        <th scope="col">creation</th>
-        <th scope="col">duration</th>
-        <th scope="col">map</th>
-        <th scope="col">queue</th>
-        <th scope="col">end</th>
-        <th scope="col">start</th>
-        <th scope="col">mode</th>
-        <th scope="col">Name</th>
-        <th scope="col">type</th>
-        <th scope="col">version</th>
-        <th scope="col">platform</th>
+        <th scope="col">Platform</th>
+        <th:block th:if="${games.size() > 0}">
+            <th:block th:each="textEntry : ${games[0].textData}">
+                <th scope="col" th:text="${textEntry.key}"></th>
+            </th:block>
+            <th:block th:each="textEntry : ${games[0].numericData}">
+                <th scope="col" th:text="${textEntry.key}"></th>
+            </th:block>
+        </th:block>
+
+
     </tr>
     </thead>
     <tbody>
     <tr th:each="game : ${games}" >
-        <td th:text="${game.matchId}"></td>
-        <td th:text="${game.gameCreation}"></td>
-        <td th:text="${game.gameDuration}"></td>
-        <td th:text="${game.mapId}"></td>
-        <td th:text="${game.queueId}"></td>
-        <td th:text="${game.gameEndTimestamp}"></td>
-        <td th:text="${game.gameStartTimestamp}"></td>
-        <td th:text="${game.gameMode}"></td>
-        <td th:text="${game.gameName}"></td>
-        <td th:text="${game.gameType}"></td>
-        <td th:text="${game.gameVersion}"></td>
-        <td th:text="${game.platform}"></td>
+        <td><a th:href="@{/game/{id}(id = ${game.textData.get('matchId')})}" th:text="${game.id.gameId}"></a></td>
+        <td th:text="${game.id.platformId}"></td>
+        <th:block th:each="textEntry : ${game.textData}">
+            <td scope="col" th:text="${textEntry.value}"></td>
+        </th:block>
+        <th:block th:each="textEntry : ${game.numericData}">
+            <td scope="col" th:text="${textEntry.value}"></td>
+        </th:block>
     </tr>
 
 </table>
