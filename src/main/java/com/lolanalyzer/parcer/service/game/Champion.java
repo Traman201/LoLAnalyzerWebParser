@@ -18,6 +18,8 @@ import java.util.Map;
 public class Champion {
     String summonerName;
     String championName;
+
+    String rawChampionName;
     List<ItemStats> items;
 
     int level;

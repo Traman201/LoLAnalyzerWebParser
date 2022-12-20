@@ -109,6 +109,7 @@ public class LocalRequester {
             Champion champion;
             if(stats.isPresent()){
                 champion = new Champion(stats.get(), summonerName, championName);
+                champion.setRawChampionName(id);
             }
             else{
                 throw new RuntimeException("Failed to initialize a game");
@@ -150,6 +151,7 @@ public class LocalRequester {
 
 
         }catch (Exception e) {
+            System.out.println(e.getMessage());
             return null;
         }
     }

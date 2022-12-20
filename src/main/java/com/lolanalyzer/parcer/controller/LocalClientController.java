@@ -8,10 +8,20 @@ import com.lolanalyzer.parcer.service.game.Champion;
 import com.lolanalyzer.parcer.service.game.LocalRequester;
 import com.lolanalyzer.parcer.service.game.Team;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.support.ServletContextResource;
+
+import javax.print.attribute.standard.Media;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.nio.file.Paths;
 
 /**
  * Контроллер эмуляции локального клиента
@@ -20,6 +30,9 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RequestMapping("/local")
 public class LocalClientController {
+
+    @Autowired
+    ServletContext context;
 
     @Autowired
     TeamDiffCalculator calculator;
@@ -83,6 +96,7 @@ public class LocalClientController {
             localGameStatus.setKill(diff.get("kills"));
             localGameStatus.setWinChance(requester.getWinChance());
 
+
         }
         else{
             index -= 5;
@@ -103,6 +117,7 @@ public class LocalClientController {
             localGameStatus.setMovementSpeed(champion.getStats().get("movementSpeed"));
             localGameStatus.setPowerMax(champion.getStats().get("powerMax"));
             localGameStatus.setKill(champion.getScore().get("kills"));
+            localGameStatus.setRawChampionName(champion.getRawChampionName());
 
         }
 
@@ -117,4 +132,5 @@ public class LocalClientController {
         n.setKeepWorking(requester.isGameStarted());
         return n;
     }
+
 }
